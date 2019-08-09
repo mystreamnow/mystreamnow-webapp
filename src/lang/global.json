@@ -1,0 +1,699 @@
+{
+  "ATITUDE_MIDIA_DIGITAL": [
+    "Atitude Mídia Digital.",
+    "Atitude Mídia Digital.",
+    "Atitude Mídia Digital."
+  ],
+
+  "WEBMEETING_TRADEMARK": ["WEBMEETING®", "WEBMEETING®", "WEBMEETING®"],
+  "TEXT_WEBMEETING": ["WebMeeting", "WebMeeting", "WebMeeting"],
+  "TEXT_REAL_TIME": ["Real Time", "Real Time", "Real Time"],
+  "TEXT_STREAMING": ["Streaming", "Streaming", "Streaming"],
+  "TEXT_STREAMING_REAL_TIME": [
+    "Streaming e Real Time",
+    "Streaming & Real Time",
+    "Streaming & Real Time"
+  ],
+  "EVENT_CODE": ["Código", "Code", "Código"],
+  "NAME": ["Nome", "Name", "Nombre"],
+  "EMAIL": ["E-mail", "Email", "E-mail"],
+  "PASSWORD": ["Senha", "Password", "Contraseña"],
+  "TEXT_AND": [" e ", " and ", " y "],
+  "TEXT_KNOW_MORE": ["Saiba mais", "Know more", "Sepa mas"],
+  "BACK_TO_TOP": ["Voltar ao topo", "Back to top", "Volver al principio"],
+
+  "BUTTON_ADMIN_TEXT": ["Administrador", "Administrator", "Administrador"],
+  "BUTTON_ADMIN_DESC": ["Acessar como:", "Login as:", "Acceder como:"],
+
+  "BUTTON_VIEWER_TEXT": ["Espectador", "Expectator", "Espectador"],
+  "BUTTON_VIEWER_DESC": [" Acessar como:", "Login as:", "Acceder como:"],
+
+  "BUTTON_SPEAKER_TEXT": ["Palestrante", "Speaker", "Orador"],
+  "BUTTON_SPEAKER_DESC": ["Acessar como:", "Login as:", "Acceder como:"],
+
+  "BUTTON_TEST_DRIVE_TEXT": ["Test-Drive", "Test-Drive", "Test-Drive"],
+  "BUTTON_TEST_DRIVE_DESC": [
+    "Quero fazer um:",
+    "I want to:",
+    "Quiero hacer um:"
+  ],
+
+  "HEADER_HOME": ["Inicial", "Home", "Inicio"],
+  "HEADER_HELP": ["Ajuda e Suporte", "Help & Support", " Ayuda y Soporte"],
+  "HEADER_DEVELOPER": [
+    "Para Desenvolvedores",
+    "For developers",
+    "Para desarrolladores"
+  ],
+  "HEADER_UPDATE": ["Atualizações", "Updates", "Actualizaciones"],
+
+  "BANNER_SOLUTION": [
+    "A solução profissional para",
+    "A professional solution for",
+    "La solución profesional para"
+  ],
+  "BANNER_ONLINE_CLASSES": [
+    "aulas online",
+    "online classes",
+    "clases en línea"
+  ],
+  "BANNER_ONLINE_EVENTS": [
+    "eventos online",
+    "online events",
+    "eventos en línea"
+  ],
+  "BANNER_ONLINE_MEETINGS": [
+    "reuniões online",
+    "online meetings",
+    "reuniones en línea"
+  ],
+  "BANNER_ONLINE_SPEECHES": [
+    "palestras online",
+    "online lectures",
+    "conferencias en línea"
+  ],
+  "BANNER_KNOW_TOOL": [
+    "Conheça a ferramenta",
+    "Know tool",
+    "Conozca la herramienta"
+  ],
+
+  "INTERFACE_WEBMEETING_SUB": [
+    " Realize ou participe de eventos online de qualquer lugar.",
+    "Perfom or take part in online events anywhere",
+    "Haga o participe en eventos en línea en cualquier lugar."
+  ],
+
+  "INTERFACE_TITLE": [
+    "Simples e Prático",
+    "Simple & Practice",
+    "Simple y práctico"
+  ],
+  "INTERFACE_SUB": [
+    "Interface intuitiva e ",
+    "Easy to use ",
+    " Interfaz intuitiva y "
+  ],
+  "INTERFACE_SUB_ACTIVE": [
+    "fácil de usar.",
+    "with intuitive interface",
+    "fácil de usar."
+  ],
+  "INTERFACE_DESC": [
+    "Painel de controle interativo e de fácil navegação, pensado estrategicamente para ajudá-lo a engajar seu público de forma rápida e prática.",
+    "Interactive, easy-to-navigate control panel strategically designed to help you engage your audience in a quick and practical way.",
+    "Panel de control interactivo y de fácil navegación, pensado estratégicamente para ayudarle a involucrar a su público de forma rápida y práctica."
+  ],
+
+  "TRANSMISSION_TITLE": [
+    "Transmissão Simultânea",
+    "Simultaneous Streaming",
+    "Transmisión Simultánea"
+  ],
+  "TRANSMISSION_SUB": [
+    "Transmita simultaneamente para as principais ",
+    "Stream simultaneously to the main ",
+    "Transmita simultaneamente para as principais "
+  ],
+  "TRANSMISSION_SUB_ACTIVE": [
+    "redes sociais e outros canais.",
+    "social medias and other channels",
+    "redes sociales y otros canales"
+  ],
+  "TRANSMISSION_DESC_PART_1": [
+    "Alcance ilimitado de audiência através das principais mídias sociais: ",
+    "Unlimited audience reach through main social medias: ",
+    "Alcance ilimitado de audiencia a través de los principales medios sociales: "
+  ],
+  "TRANSMISSION_DESC_PART_3": [
+    "Além disso, é possível realizar transmissões para o ",
+    "In addition, stream to, ",
+    "Además, es posible realizar transmisiones en "
+  ],
+  "TRANSMISSION_YOUTUBE_LIVE": ["Youtube Live", "Youtube Live", "Youtube Live"],
+  "TRANSMISSION_FACEBOOK_LIVE": [
+    "Facebook Live. ",
+    "Facebook Live. ",
+    "Facebook Live. "
+  ],
+  "TRANSMISSION_TWITCH_LIVE": [
+    "Twitch TV, entre outros canais.",
+    "Twitch TV, and other channels",
+    "Twitch TV, entre otros canales"
+  ],
+
+  "APPLICATIONS_BROWSER_TEXT": [
+    "Sem necessidade de instalação.",
+    "No need to install",
+    "Sin necesidad de instalación."
+  ],
+  "APPLICATIONS_BROWSER_TEXT_ACTIVE": [
+    "Acesse diretamente do navegador.",
+    "Access directly from your browser",
+    "Acceda directamente desde el navegador"
+  ],
+  "APPLICATIONS_TITLE": [
+    "Aplicativos Android e IOS",
+    "Android & IOS Apps",
+    "Aplicaciones Android y IOS"
+  ],
+  "APPLICATIONS_SUB_PART_1": [
+    "Recursos projetados para dar",
+    "Resources created to give",
+    "Recursos diseñados para dar"
+  ],
+  "APPLICATIONS_SUB_PART_2": ["ao seu evento", "your event", "a su evento"],
+  "APPLICATIONS_SUB_ACTIVE": [
+    " mais flexibilidade ",
+    " more flexibility ",
+    " más flexibilidad "
+  ],
+  "APPLICATIONS_DESC": [
+    "Conheça os recursos de interação com usuários e palestrantes para dispositivos móveis.",
+    "Get to know about user interaction features and mobile speaker features.",
+    "Conozca los recursos de interacción con usuarios y oradores para dispositivos móviles."
+  ],
+  "APPLICATIONS_STORES": [
+    "Disponível nas lojas:",
+    "Available on:",
+    "Disponible em:"
+  ],
+
+  "TECNOLOGIES_SUB": [
+    "Escolha entre duas tecnologias de transmissão ou utilize ambas simultaneamente.",
+    "Choose between the two streaming technologies or use both simultaneously.",
+    "Elija entre dos tecnologías de transmisión o utilice ambas simultáneamente."
+  ],
+  "TECNOLOGIES_REAL_TIME_SUB_1": [
+    "Controle e alinhamento em tempo real",
+    "Real-time control and alignment",
+    "Control y alineación en tiempo real"
+  ],
+  "TECNOLOGIES_REAL_TIME_SUB_2": [
+    "(Até 3.000 usuários)",
+    "(Up to 3.000 users)",
+    "(Hasta 3.000 usuarios)"
+  ],
+  "TECNOLOGIES_REAL_TIME_ITEM_1": [
+    "Ideal para alinhamento com equipes.",
+    "Ideal for team alignment",
+    "Ideal para la alineación con equipos"
+  ],
+  "TECNOLOGIES_REAL_TIME_ITEM_2": [
+    "Aulas, treinamentos e seminários.",
+    "Classes, training and seminaries.",
+    "Clases, entrenamientos y seminários."
+  ],
+  "TECNOLOGIES_STREAMING_SUB_1": [
+    "Transmissão com alcance ilimitado",
+    "Stream with unlimited reach",
+    "Transmisión con alcance ilimitado"
+  ],
+  "TECNOLOGIES_STREAMING_SUB_2": [
+    "(Acima de 3.000 usuários)",
+    "(Over 3.000 users)",
+    "(Más de 3.000 usuarios)"
+  ],
+  "TECNOLOGIES_STREAMING_ITEM_1": [
+    "Ideal para eventos em larga escala.",
+    "Ideal for large scale events.",
+    "Ideal para eventos a gran escala."
+  ],
+  "TECNOLOGIES_STREAMING_ITEM_2": [
+    "Transmissão em redes sociais e outros canais.",
+    "Social media and other channels streaming",
+    "Social media y otros canales de streaming"
+  ],
+  "TECNOLOGIES_REAL_STREAMING": [" com ", "with", "con"],
+  "TECNOLOGIES_REAL_STREAMING_SUB_1": [
+    "Transmissão em tempo real",
+    "Real time streaming",
+    "Transmisión en tiempo real"
+  ],
+  "TECNOLOGIES_REAL_STREAMING_SUB_2": [
+    "e com alcance ilimitado",
+    "with unlimited reach",
+    "y con alcance ilimitado"
+  ],
+  "TECNOLOGIES_REAL_STREAMING_ITEM_1": [
+    "Ideal para eventos corporativos de grande porte.",
+    "Ideal for large scale corporative events",
+    "Ideal para eventos corporativos de gran tamaño"
+  ],
+  "TECNOLOGIES_REAL_STREAMING_ITEM_2": [
+    "O melhor das duas tecnologias.",
+    "The besto of both Technologies.",
+    "El mejor de las dos tecnologías."
+  ],
+
+  "FEATURES_TITLE": ["Funcionalidades", "Functionalities", "Características"],
+  "FEATURES_SUB_PART_1": [
+    "Ferramentas para facilitar a",
+    "Tools to ease the",
+    "Herramientas para facilitar la"
+  ],
+  "FEATURES_SUB_PART_2": [
+    "dos seus eventos.",
+    "of your events",
+    "de sus actos."
+  ],
+  "FEATURES_SUB_ACTIVE": [
+    " transmissão, interação e análise ",
+    " streaming, interaction and analysis ",
+    " transmisión, interacción y análisis "
+  ],
+  "FEATURES_SCREEN_SHARE_TITLE": [
+    "Compartilhamento de Tela",
+    "ScreenSharing",
+    "ScreenSharing"
+  ],
+  "FEATURES_SCREEN_SHARE_SUB": [
+    "Aproveite 100% dos recursos visuais utilizados na sua apresentação.",
+    "Make use of 100% of the visuals resources in your presentation.",
+    "Aproveche 100% de los recursos visuales utilizados en su presentación."
+  ],
+  "FEATURES_SURVEY_TITLE": [
+    "Enquetes e Pesquisas",
+    "Polls & Surveys",
+    "Encuestas"
+  ],
+  "FEATURES_SURVEY_SUB": [
+    "Realize enquetes e pesquisas e obtenha resultados em tempo real.",
+    "Create Polls & Surveys and obtain real time results",
+    "Realize encuestas y obtenga resultados en tiempo real"
+  ],
+  "FEATURES_PRESENTATION_TITLE": [
+    "Apresentações Interativas",
+    "Interactive presentations",
+    "Presentaciones Interactivas"
+  ],
+  "FEATURES_PRESENTATION_SUB": [
+    "Insira formulários para captação, pesquisas, avaliações e vendas.",
+    "Enter forms for capturing, researching, evaluating, and selling.",
+    "Introduzca formularios para captación, encuestas, evaluaciones y ventas."
+  ],
+  "FEATURES_ANALYZE_TITLE": [
+    "Análise de Desempenho",
+    "Performance Analysis",
+    "Análisis de rendimiento"
+  ],
+  "FEATURES_ANALYZE_SUB": [
+    "Acompanhe em tempo real a performance do seu evento.",
+    "Keep track of the event’s performance in real time.",
+    "Acompañe en tiempo real el desempeño de su evento."
+  ],
+  "FEATURES_SAFETY_TITLE": [
+    "Segurança de Dados",
+    "Data Security",
+    "Seguridad de datos"
+  ],
+  "FEATURES_SAFETY_SUB": [
+    "Mantenha a segurança de seus dados sigilosos.",
+    "Keep your data secure and confidential.",
+    "Mantenga la seguridad de sus datos secretos."
+  ],
+  "FEATURES_CUSTOM_TITLE": [
+    "Aparência Customizável",
+    "Customizable appearance",
+    "Apariencia personalizable"
+  ],
+  "FEATURES_CUSTOM_SUB": [
+    "Utilize na interface os seus logos e cores institucionais.",
+    "Use your institutional logos and colors on the interface.",
+    "Utilice en la interfaz sus logos y colores institucionales."
+  ],
+
+  "FREE_TRIAL_TEXT": [
+    "Faça uma avaliação gratuita.",
+    "Make a free trial",
+    "Haga una evaluación gratuita."
+  ],
+
+  "FOOTER_CONTACT": ["Contato", "Contact", " Contacto"],
+  "FOOTER_CONTACT_LINK_1": ["0800 771 5643", "0800 771 5643", "0800 771 5643"],
+  "FOOTER_CONTACT_LINK_2": [
+    "R. Bragança Paulista, 145",
+    "R. Bragança Paulista, 145",
+    "R. Bragança Paulista, 145"
+  ],
+  "FOOTER_CONTACT_LINK_3": [
+    "Vila Cruzeiro, São Paulo",
+    "Vila Cruzeiro, São Paulo",
+    "Vila Cruzeiro, São Paulo"
+  ],
+  "FOOTER_CONTACT_LINK_4": ["CEP 04727-000", "CEP 04727-000", "CEP 04727-000"],
+  "FOOTER_USEFUL": ["Links úteis", "Useful links", "Links útiles"],
+  "FOOTER_USEFUL_LINK_1": [
+    "Ajuda e Suporte",
+    "Help & Support",
+    "Ayuda y Soporte "
+  ],
+  "FOOTER_USEFUL_LINK_2": [
+    "Política de Privacidade",
+    "Privacy Policy",
+    "Política de privacidad"
+  ],
+  "FOOTER_USEFUL_LINK_3": [
+    "Teste sua Conexão",
+    "Test your connection",
+    "Pruebe su conexión"
+  ],
+  "FOOTER_INTEGRATION": ["Integração", "Integration", "Integración"],
+  "FOOTER_INTEGRATION_LINK_1": [
+    "Para desenvolvedores",
+    "For developers",
+    "Para los desarrolladores"
+  ],
+  "FOOTER_UPDATE": [
+    "Receba nossas atualizações",
+    "Receive our updates",
+    "Para los desarrolladores"
+  ],
+  "FOOTER_UPDATE_LINK_1": [
+    "Fique por dentro das novidades do WM Direct",
+    "Stay tuned for what's new in WM Direct",
+    "Mantente al día de las novedades de WM Direct"
+  ],
+  "FOOTER_PARTNER": ["Parceiros", "Partners", "Socios"],
+  "FOOTER_GET_APP": [
+    "Baixe o aplicativo",
+    "Download the APP",
+    "Descarga la aplicación"
+  ],
+  "FOOTER_COPYRIGHT": [
+    "© 2019 WM Direct.",
+    "© 2019 WM Direct.",
+    "© 2019 WM Direct."
+  ],
+  "FOOTER_ALL_RIGHTS_RESERVED": [
+    " Todos os direitos reservados. ",
+    " All rights reserved ",
+    " Todos los derechos reservados. "
+  ],
+  "FOOTER_DEVELOPED_BY": [
+    "Desenvolvido por",
+    "Developed by",
+    "Desarrollado por"
+  ],
+
+  "LANDING_TEXT_BANNER": [
+    "Agora ficou fácil fazer uma transmissão profissional. Conheça o WebMeeting ",
+    " Making a professional broadcast just got easier. Get to know WebMeeting ",
+    " Ahora es fácil hacer una transmisión profesional. Conozca WebMeeting "
+  ],
+  "LANDING_KNOW_WEBMEETING": [
+    "Conheça o WebMeeting.",
+    " Get to know WebMeeting ",
+    " Conozca WebMeeting "
+  ],
+  "LANDING_MOBILE_TEXT_BANNER": [
+    "Agora ficou fácil fazer uma transmissão profissional.",
+    " Making a professional broadcast just got easier ",
+    " Ahora es fácil hacer una transmisión profesional "
+  ],
+  "LANDING_REAL_TIME_DESC": [
+    "Realize eventos online sem dificuldades e alcance seu público sem a necessidade de instalação ou conhecimentos avançados de informática. Crie um evento em poucos passos e aproveite os recursos que estimulam a interatividade em tempo real.",
+    " Conduct online events without difficulty and reach your audience without the need for installation or advanced computer skills. Create an event in just a few steps and take advantage of the features that stimulate real-time interactivity.",
+    " Realize eventos online sin dificultades y alcance tu público sin la necesidad de instalación o conocimientos avanzados de informática. Cree un evento en pocos pasos y aproveche los recursos que estimulan la interactividad en tiempo real. "
+  ],
+  "LANDING_REAL_TIME_LIST_TITLE": [
+    "Painel de Controle e Ações",
+    " Control Panel and Actions ",
+    " Panel de Control y Acciones "
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_1": [
+    "Mudança de layout",
+    " Layout changes",
+    " Cambio de layout "
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_1": [
+    "Altere a disposição das câmeras para horizontal/vertical.",
+    "Change the layout of the cameras to horizontal/vertical",
+    "Cambie la disposición de las cámaras a horizontal/vertical"
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_2": [
+    "Abrir apresentação",
+    "Open presentation",
+    "Abrir presentación"
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_2": [
+    "Utilize apresentações em PowerPoint e Excel.",
+    "Use PowerPoint and Excel presentations",
+    "Utilice presentaciones en PowerPoint y Excel"
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_3": [
+    "Compartilhamento de tela",
+    "ScreenShare",
+    "Compartición de pantalla"
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_3": [
+    "Aproveite 100% dos recursos visuais da sua apresentação compartilhando a tela de seu computador.",
+    "Enjoy 100% of your presentation’s visual resources by sharing your computer screen.",
+    "Disfruta 100% de los recursos visuales de tu presentación compartiendo la pantalla de tu ordenador."
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_4": [
+    "Mais Configurações",
+    "More Settings",
+    "Más configuraciones"
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_4": [
+    "Enquetes: Realize enquetes e pesquisas e obtenha resultado em tempo real.",
+    "Polls: Conduct polls and surveys and get real-time results.",
+    "Encuestas: Realice encuestas y obtenga resultados en tiempo real."
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_5": [
+    "Full Screen",
+    "Full Screen",
+    "Full Screen"
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_5": [
+    "Maximize a janela da transmissão para assistir em tela cheia.",
+    "Maximize the broadcast window to watch in full screen.",
+    "Maximice la ventana de transmisión para ver la pantalla completa."
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_6": ["Sair", "Exit", "Salir"],
+  "LANDING_REAL_TIME_LIST_DESC_6": [
+    "Ao clicar em sair do evento, você será desconectado da transmissão, já se clicar em encerrar transmissão todos os participantes serão desconectados e a transmissão será encerrada.",
+    "Click on <strong>exit the event</strong> and you will be disconnected from the broadcast, if you click on <strong>end broadcast</strong> all participants will be disconnected and the broadcast will be finalized.",
+    "Al hacer clic en salir del evento, se desconectará de la transmisión, ya que si hace clic en cerrar transmisión, todos los participantes se desconectan y la transmisión que se cerrará"
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_7": ["Menu", "Menu", "Menú"],
+  "LANDING_REAL_TIME_LIST_DESC_7": [
+    "Ao clicar em “Menu” será aberta uma janela lateral com opções de visualização de participantes, mensagens, informações do evento e configuração de câmera e microfone.",
+    "Clicking on “Menu” a side window with viewing participants, messages, event information and camera and microphone settings options will open.",
+    "Al hacer clic en “Menú” se abrirá una ventana lateral con opciones de visualización de participantes, mensajes, información del evento y configuración de cámara y micrófono."
+  ],
+  "LANDING_REAL_TIME_LIST_ITEM_8": ["Suporte", "Support", "Soporte"],
+  "LANDING_REAL_TIME_LIST_DESC_8": ["EM BREVE", "COMING SOON", "EN BREVE"],
+  "LANDING_REAL_TIME_LIST_ITEM_9": [
+    "Transmissão simultânea",
+    "Simultaneous transmission",
+    "Transmisión simultánea "
+  ],
+  "LANDING_REAL_TIME_LIST_DESC_9": [
+    "Transmita ao vivo para o Facebook, Twitter, Instagram, Twitch e YouTube simultaneamente.",
+    "Cast live to Facebook, Twitter, Instagram, Twitch and YouTube simultaneously.",
+    "Transmita en vivo a Facebook, Twitter, Instagram, Twitch y YouTube simultaneamente."
+  ],
+  "LANDING_STREAMING_DESC": [
+    "A Solução de transmissão altamente escalável. Através do WM Direct Web Player é possível gerar eventos ao vivo e sob demanda para público ilimitado, com ou sem tradução simultânea.",
+    "The highly scalable transmission solution. Through WM Direct Web Player it is possible to generate events live and on demand for unlimited public, with or without simultaneous translation. ",
+    "La solución de transmisión altamente escalable. A través de WM Direct Web Player es posible generar eventos en vivo y bajo demanda para público ilimitado, con o sin traducción simultánea. "
+  ],
+  "LANDING_STREAMING_LIST_ITEM_1": ["Perguntar", "Ask", "Preguntar"],
+  "LANDING_STREAMING_LIST_DESC_1": [
+    "Envio de perguntas diretamente para os palestrantes com possibilidade de moderação.",
+    "Send questions directly to the speakers, with mediation resources",
+    "Envío de preguntas directamente a los oradores con posibilidad de moderación."
+  ],
+  "LANDING_STREAMING_LIST_ITEM_2": ["Expandir", "Expand", "Expandir"],
+  "LANDING_STREAMING_LIST_DESC_2": [
+    "Maximize a janela da transmissão para assistir em tela cheia.",
+    "Maximize broadcast window to watch on full screen",
+    "Maximice la ventana de la transmisión para ver en pantalla completa"
+  ],
+  "LANDING_STREAMING_LIST_ITEM_3": ["Idioma", " Language", "Idioma"],
+  "LANDING_STREAMING_LIST_DESC_3": [
+    "Aproveite o recurso de tradução simultânea em sua transmissão.",
+    "Make use of the simultaneous translation feature in your broadcast.",
+    "Aproveche el recurso de traducción simultánea en su transmisión."
+  ],
+  "LANDING_STREAMING_LIST_ITEM_4": ["Download", "Download", "Download"],
+  "LANDING_STREAMING_LIST_DESC_4": [
+    "Faça download de materiais compartilhados durante o evento.",
+    "Download shared materials during the event.",
+    "Descargue materiales compartidos durante el evento."
+  ],
+  "LANDING_STREAMING_LIST_ITEM_5": [
+    "Ajuda e suporte",
+    "Help & Support",
+    "Ayuda y Soporte"
+  ],
+  "LANDING_STREAMING_LIST_DESC_5": [
+    "Suporte diretamente com a equipe técnica para auxiliar usuários com eventuais dificuldades.",
+    "Support provided directly by the technical team to assist users with possible difficulties ",
+    "Soporte directamente con el equipo técnico para ayudar a los usuarios con eventuales dificultades."
+  ],
+  "LANDING_REMOTE_MODERATION": [
+    "Moderação Remota",
+    "Remote mediator ",
+    "Moderación remota "
+  ],
+  "LANDING_MODERATION_DESC": [
+    "Recursos para facilitar a interação com o público como você nunca viu antes. Através do painel administrativo de evento é possível habilitar a moderação de mensagens recebidas e encaminhá-las para os palestrantes desejados, além de alterar o modo de exibição de câmera e tela sempre que necessário.",
+    "Features to facilitate interaction with the public like you've never seen before. Through the event administrative panel, you can enable the moderation of incoming messages and forward them to the speakers you want, as well as change the camera and screen view whenever necessary.",
+    "Recursos para facilitar la interacción con el público como usted nunca ha visto antes. A través del panel administrativo de eventos es posible habilitar la moderación de mensajes recibidos y reenviarlos a los oradores deseados, además de cambiar la vista de cámara y la pantalla siempre que sea necesario."
+  ],
+  "LANDING_FEATURES": [
+    "Utilize o melhor das duas ferramentas simultaneamente. Você poderá utilizar a opção de transmissão via redes sociais e incorporar player vídeo em seu website, obtendo alcance ilimitado de audiência.",
+    "Use the best of both tools simultaneously. You can use the social media streaming option and embed the video player on your website, and have unlimited audience reach.",
+    "Utilice el mejor de las dos herramientas simultáneamente. Usted podrá utilizar la opción de transmisión vía redes sociales y incorpore un reproductor de vídeo en su sitio web, conseguindo alcance ilimitado de audiencia."
+  ],
+  "LANDING_PRIVACY_TEXT": [
+    "(*) Para saber mais sobre a segurança das nossas tecnologias acesse:",
+    "(*) To know more about the security of our technologies, visit:",
+    "(*) Para obtener más información sobre la seguridad de nuestras tecnologías, visite:"
+  ],
+  "PRIVACY_POLICY": [
+    "Política de Privacidade.",
+    "Privacy Policy",
+    "Política de Privacidad"
+  ],
+  "LANDING_TABLE_MAIN": [
+    "Principais Características",
+    "Main features",
+    "Principales características"
+  ],
+  "LANDING_TABLE_SPEAKER": ["Palestrantes", "Speaker", " Oradores "],
+  "LANDING_TABLE_PUBLIC": ["Público", "Audience", "Público"],
+  "LANDING_TABLE_TEXT_ROW_1": [
+    "Interface com layout dinâmico sem limitações",
+    "Dynamic layout interface without limitations",
+    "Interface con diseño dinámico sin limitaciones"
+  ],
+  "LANDING_TABLE_TEXT_ROW_2": [
+    "Compartilhamento de tela (Screen Sharing)",
+    "Screen Sharing",
+    "Compartir pantalla (Screen Sharing)"
+  ],
+  "LANDING_TABLE_TEXT_ROW_3": [
+    "Apresentações em HTML5 com interatividade",
+    "HTML5 presentations with interactivity",
+    "Presentaciones en HTML5 con interactividad"
+  ],
+  "LANDING_TABLE_TEXT_ROW_4": [
+    "Disponibilidade ao vivo de suporte à distância e controle de layout",
+    "Live availability of remote support and layout control",
+    "Disponibilidad de soporte a distancia y control de layout a todo el tiempo"
+  ],
+  "LANDING_TABLE_TEXT_ROW_5": [
+    "Até 3.000 participantes em tempo real",
+    "Up to 3,000 participants in real time",
+    "Hasta 3.000 participantes en tiempo real"
+  ],
+  "LANDING_TABLE_TEXT_ROW_6": [
+    "Público ilimitado (Acima de 3.000 usuários)",
+    "Unlimited audience (Over 3,000 users)",
+    "Público ilimitado (Más de 3.000 usuarios)"
+  ],
+  "LANDING_TABLE_TEXT_ROW_7": [
+    "Interação do público por áudio, vídeo, enquetes e texto",
+    "Audience interaction by audio, video, polls and text.",
+    "Interacción del público por audio, vídeo, encuestas y texto."
+  ],
+  "LANDING_TABLE_TEXT_ROW_8": [
+    "Interação do público somente por texto e enquetes",
+    "Audience interaction only by text and polls",
+    "Interacción del público por texto y enquetes"
+  ],
+  "LANDING_TABLE_TEXT_ROW_9": [
+    "Tradução simultânea",
+    "Simultaneous translation",
+    "Traducción simultánea"
+  ],
+  "LANDING_TABLE_TEXT_ROW_10": [
+    "Bloqueio de participantes indesejáveis já logados",
+    "Block undesired participants already logged in",
+    "Bloqueo de participantes indeseables ya registrados"
+  ],
+  "LANDING_TABLE_TEXT_ROW_11": [
+    "Transmissão para redes sociais e outros canais",
+    "Broadcast to social medias and other channels",
+    "Transmisión para redes sociales y otros canales"
+  ],
+  "LANDING_TABLE_TEXT_ROW_12": [
+    "Segurança de dados*",
+    "Data Security*",
+    "Seguridad de Datos*"
+  ],
+  "FOOTER_FOLLOW": ["Siga-nos:", "Follow us:", " Síguenos:"],
+
+  "SIGN_IN_SPEAKER_TITLE": [
+    "Acessar como palestrante",
+    "Login as speaker",
+    "Acceder como orador"
+  ],
+  "SIGN_IN_VIEWER_TITLE": ["Assistir evento", "Watch event", "Ver evento"],
+  "SIGN_IN_VIEWER_SUBTITLE": [
+    "Para acessar, utilize o código e senha informados no convite do evento. <br />Em seguida, informe o e-mail pelo qual foi convidado.",
+    "To access, use the code and password provided in the event invitation. <br /> Then enter the e-mail by which you were invited.",
+    "Para acceder, utilice el código y la contraseña informados en la invitación del evento. <br />Informe el e-mail por el cual fue invitado."
+  ],
+  "SIGN_IN_SPEAKER_SUBTITLE": [
+    "Informe os dados do evento recebidos por e-mail.",
+    "Enter the event data received by email",
+    "Introduzca los datos del evento recibidos por correo electrónico."
+  ],
+  "SIGN_IN_SPEAKER_ERROR_UNAVAILABLE": [
+    "Evento indisponível, aguarde a gravação ser finalizada.",
+    "Event unavailable, wait for the recording to be finalized.",
+    "El evento no está disponible, espere a que se finaliza la grabación."
+  ],
+  "SIGN_IN_SPEAKER_ERROR_INCORRECT": [
+    "Dados incorretos, favor verificar e tentar novamente.",
+    "Incorrect data, please check and try again.",
+    "Datos incorrectos, compruebe y vuelva a intentarlo."
+  ],
+  "SIGN_IN_SPEAKER_ERROR_DUPLICATE": [
+    "Você já estava participando deste evento com o mesmo e-mail digitado, por favor, tente entrar novamente.",
+    "You were already participating in this event with the same email entered, please try to sign in again",
+    "Usted ya estaba participando en este evento con el mismo correo electrónico escrito, por favor, intente entrar de nuevo"
+  ],
+  "SIGN_IN_VIEWER_BROWSER_TEXT": [
+    "Para assistir este evento, recomendamos o <br />uso dos seguintes navegarores:",
+    "To watch this event, we recommend the <br />use of the following browsers:",
+    "Para ver este evento, recomendamos el <br />uso de los siguientes navegadores:"
+  ],
+  "SIGN_IN_SPEAKER_BROWSER_TEXT": [
+    "Para participar como palestrante deste evento, <br />recomendamos o uso dos seguintes navegarores:",
+    "To participate as a speaker of this event, <br />we recommend using the following browsers:",
+    "Para participar como ponente de este evento, <br />recomendamos el uso de los siguientes navegadores:"
+  ],
+
+  "TEST_DRIVE_TITLE": [
+    "Faça agora o seu test-drive e <span class='test-drive-spotligth'>vivencie uma experiência única</span>, entrando em uma nova era da comunicação profissional online.",
+    "Have a test drive now <span class='test-drive-spotligth'>na experience something unique</span>, entering a new era of online professional communication.",
+    "Ahora haga su test-drive y <span class='test-drive-spotligth'>vivencie una experiencia única</span>, entrando en una nueva era de la comunicación profesional en línea."
+  ],
+  "TEST_DRIVE_AGREES": [
+    "Ao se inscrever, você concorda com nossa ",
+    "By signing up, you agree to our ",
+    "Al inscribirse, usted está de acuerdo con nuestra "
+  ],
+  "TEST_DRIVE_MAILING": [
+    "Receba atualizações e ofertas WebMeeting.",
+    "Get updates and WebMeeting offers.",
+    "Recibe actualizaciones y ofertas WebMeeting."
+  ],
+  "TEST_DRIVE_HAVE_ACCOUNT": [
+    "Já possui uma conta?",
+    "Already have an account?",
+    "¿Ya tienes una cuenta?"
+  ],
+  "TEST_DRIVE_LOGIN": ["Faça o login", "Login", "Iniciar sesión"],
+  "TEST_DRIVE_PRIVACY_POLICY": [
+    "Política de Privacidade",
+    "Privacy Policy",
+    "Política de privacidad"
+  ]
+}
