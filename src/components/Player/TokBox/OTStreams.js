@@ -1,33 +1,29 @@
 import React, { Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import OTSubscriberContext from './OTSubscriberContext';
 
-export default function OTStreams (props, context) {
-  const session = props.session || context.session || null;
-  const streams = props.streams || context.streams || null;
-
-  if (!session) {
+export default function OTStreams (props) {
+  if (!props.session) {
     return <div />;
   }
 
   const child = Children.only(props.children);
 
-  const childrenWithContextWrapper = Array.isArray(streams)
-    ? streams.map(
+  props.countStreams();
+
+  const childrenWithProps = Array.isArray(props.streams)
+    ? props.streams.map(
         stream =>
           child
-            ? <OTSubscriberContext stream={stream} key={stream.id}>
-              {cloneElement(child)}
-            </OTSubscriberContext>
+            ? cloneElement(child, {
+              session: props.session,
+              stream,
+              key: stream.id
+            })
             : child
       )
     : null;
 
-  return (
-    <div>
-      {childrenWithContextWrapper}
-    </div>
-  );
+  return [childrenWithProps];
 }
 
 OTStreams.propTypes = {
@@ -41,13 +37,5 @@ OTStreams.propTypes = {
 
 OTStreams.defaultProps = {
   session: null,
-  streams: null
-};
-
-OTStreams.contextTypes = {
-  session: PropTypes.shape({
-    publish: PropTypes.func,
-    subscribe: PropTypes.func
-  }),
-  streams: PropTypes.arrayOf(PropTypes.object)
+  streams: []
 };

@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import { Component, Children, cloneElement } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { streams } from './../../../actions/Player';
 
 import createSession from './createSession';
 
-export default class OTSession extends Component {
-  constructor (props) {
+class OTSession extends Component {
+  constructor(props) {
     super(props);
 
     this.state = {
-      streams: []
+      streams: [],
     };
   }
 
-  getChildContext () {
-    return { session: this.sessionHelper.session, streams: this.state.streams };
-  }
-
-  componentWillMount () {
+  componentWillMount() {
     this.createSession();
   }
 
-  UNSAFE_componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       prevProps.apiKey !== this.props.apiKey ||
       prevProps.sessionId !== this.props.sessionId ||
@@ -30,11 +28,11 @@ export default class OTSession extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.destroySession();
   }
 
-  createSession () {
+  createSession() {
     this.destroySession();
 
     this.sessionHelper = createSession({
@@ -45,7 +43,7 @@ export default class OTSession extends Component {
         this.setState({ streams });
       },
       onConnect: this.props.onConnect,
-      onError: this.props.onError
+      onError: this.props.onError,
     });
 
     if (
@@ -59,7 +57,7 @@ export default class OTSession extends Component {
     this.setState({ streams });
   }
 
-  destroySession () {
+  destroySession() {
     if (this.sessionHelper) {
       if (
         this.props.eventHandlers &&
@@ -71,38 +69,53 @@ export default class OTSession extends Component {
     }
   }
 
-  render () {
-    return (
-      <div>
-        {this.props.children}
-      </div>
+  render() {
+    const childrenWithProps = Children.map(this.props.children, child =>
+      child
+        ? cloneElement(child, {
+            session: this.sessionHelper.session,
+            streams: this.state.streams,
+          })
+        : child,
     );
+
+    return [childrenWithProps];
   }
 }
 
 OTSession.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired,
+  // children: PropTypes.oneOfType([
+  //   PropTypes.element,
+  //   PropTypes.arrayOf(PropTypes.element),
+  // ]),
   apiKey: PropTypes.string.isRequired,
   sessionId: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onConnect: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
 };
 
 OTSession.defaultProps = {
   eventHandlers: null,
   onConnect: null,
-  onError: null
+  onError: null,
 };
 
-OTSession.childContextTypes = {
-  streams: PropTypes.arrayOf(PropTypes.object),
-  session: PropTypes.shape({
-    subscribe: PropTypes.func,
-    unsubscribe: PropTypes.func
-  })
+const mapStateToProps = state => ({
+  streams: state.Streams,
+  user: state.session.user,
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setStreams: count => {
+      dispatch(streams(count));
+    },
+  };
 };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(OTSession);

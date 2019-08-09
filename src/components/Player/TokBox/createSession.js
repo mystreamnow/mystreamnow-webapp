@@ -1,8 +1,13 @@
 import OT from '@opentok/client';
 
-export default function createSession (
-  { apiKey, sessionId, token, onStreamsUpdated, onConnect, onError } = {}
-) {
+export default function createSession({
+  apiKey,
+  sessionId,
+  token,
+  onStreamsUpdated,
+  onConnect,
+  onError,
+} = {}) {
   if (!apiKey) {
     throw new Error('Missing apiKey');
   }
@@ -35,7 +40,7 @@ export default function createSession (
 
   let eventHandlers = {
     streamCreated: onStreamCreated,
-    streamDestroyed: onStreamDestroyed
+    streamDestroyed: onStreamDestroyed,
   };
 
   let session = OT.initSession(apiKey, sessionId);
@@ -56,7 +61,7 @@ export default function createSession (
   return {
     session,
     streams,
-    disconnect () {
+    disconnect() {
       if (session) {
         session.off(eventHandlers);
         session.disconnect();
@@ -70,6 +75,6 @@ export default function createSession (
 
       this.session = null;
       this.streams = null;
-    }
+    },
   };
 }

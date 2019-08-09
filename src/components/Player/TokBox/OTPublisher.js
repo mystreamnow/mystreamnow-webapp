@@ -1,18 +1,21 @@
-import OT from '@opentok/client';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import once from 'lodash/once';
-import { omitBy, isNil } from 'lodash/fp';
 import uuid from 'uuid';
+import OT from '@opentok/client';
+import { connect } from 'react-redux';
+import { Fab, Icon, Tooltip } from '@material-ui/core';
+import { allowCam, allowMic } from './../../../actions/Player';
 
-export default class OTPublisher extends Component {
-  constructor(props, context) {
+class OTPublisher extends Component {
+  constructor(props) {
     super(props);
 
     this.state = {
+      pubError: null,
       publisher: null,
+      hideCamMic: false,
       lastStreamId: '',
-      session: props.session || context.session || null,
     };
   }
 
@@ -20,7 +23,7 @@ export default class OTPublisher extends Component {
     this.createPublisher();
   }
 
-  UNSAFE_componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const useDefault = (value, defaultValue) =>
       value === undefined ? defaultValue : value;
 
@@ -37,7 +40,19 @@ export default class OTPublisher extends Component {
       }
     };
 
+    if (shouldUpdate('audioSource', undefined)) {
+      this.destroyPublisher();
+      this.createPublisher();
+      return;
+    }
+
     if (shouldUpdate('videoSource', undefined)) {
+      this.destroyPublisher();
+      this.createPublisher();
+      return;
+    }
+
+    if (shouldUpdate('fitMode', undefined)) {
       this.destroyPublisher();
       this.createPublisher();
       return;
@@ -46,15 +61,15 @@ export default class OTPublisher extends Component {
     updatePublisherProperty('publishAudio', true);
     updatePublisherProperty('publishVideo', true);
 
-    if (this.state.session !== prevState.session) {
-      this.destroyPublisher(prevState.session);
+    if (this.props.session !== prevProps.session) {
+      this.destroyPublisher(prevProps.session);
       this.createPublisher();
     }
   }
 
   componentWillUnmount() {
-    if (this.state.session) {
-      this.state.session.off('sessionConnected', this.sessionConnectedHandler);
+    if (this.props.session) {
+      this.props.session.off('sessionConnected', this.sessionConnectedHandler);
     }
 
     this.destroyPublisher();
@@ -64,7 +79,7 @@ export default class OTPublisher extends Component {
     return this.state.publisher;
   }
 
-  destroyPublisher(session = this.state.session) {
+  destroyPublisher(session = this.props.session) {
     delete this.publisherId;
 
     if (this.state.publisher) {
@@ -89,7 +104,7 @@ export default class OTPublisher extends Component {
   publishToSession(publisher) {
     const { publisherId } = this;
 
-    this.state.session.publish(publisher, err => {
+    this.props.session.publish(publisher, err => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -104,7 +119,7 @@ export default class OTPublisher extends Component {
   }
 
   createPublisher() {
-    if (!this.state.session) {
+    if (!this.props.session) {
       this.setState({ publisher: null, lastStreamId: '' });
       return;
     }
@@ -114,7 +129,7 @@ export default class OTPublisher extends Component {
 
     if (properties.insertDefaultUI !== false) {
       container = document.createElement('div');
-      container.setAttribute('class', 'OTPublisherContainer');
+      container.setAttribute('class', `OTPublisherContainer pub_1`);
       this.node.appendChild(container);
     }
 
@@ -129,6 +144,10 @@ export default class OTPublisher extends Component {
       }
       if (typeof this.props.onError === 'function') {
         this.props.onError(err);
+
+        if (err.code === 1500 && err.name === 'OT_NO_DEVICES_FOUND') {
+          this.setState({ pubError: err });
+        }
       }
     });
 
@@ -144,20 +163,20 @@ export default class OTPublisher extends Component {
         this.props.onInit();
       }
     });
+
     publisher.on('streamCreated', this.streamCreatedHandler);
 
     if (
       this.props.eventHandlers &&
       typeof this.props.eventHandlers === 'object'
     ) {
-      const handles = omitBy(isNil)(this.props.eventHandlers);
-      publisher.on(handles);
+      publisher.on(this.props.eventHandlers);
     }
 
-    if (this.state.session.connection) {
+    if (this.props.session.connection) {
       this.publishToSession(publisher);
     } else {
-      this.state.session.once('sessionConnected', this.sessionConnectedHandler);
+      this.props.session.once('sessionConnected', this.sessionConnectedHandler);
     }
 
     this.setState({ publisher, lastStreamId: '' });
@@ -171,13 +190,62 @@ export default class OTPublisher extends Component {
     this.setState({ lastStreamId: event.stream.id });
   };
 
+  setAllowCam = data => {
+    this.props.onAllowCam(!data);
+  };
+
+  setAllowMic = data => {
+    this.props.onAllowMic(!data);
+  };
+
   render() {
+    const { allowCam, allowMic } = this.props;
+
     return (
-      <div
-        ref={node => {
-          this.node = node;
-        }}
-      />
+      <div id="publisher" ref={node => (this.node = node)}>
+        {this.state.pubError === null
+          ? <div className="box-buttons">
+              <Tooltip
+                title={allowCam ? 'Desabilitar' : 'Habilitar'}
+                placement="right"
+              >
+                <Fab
+                  className={`transparent btn-video ${allowCam
+                    ? ''
+                    : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
+                  onClick={() => this.setAllowCam(allowCam)}
+                >
+                  {allowCam ? <Icon>videocam</Icon> : <Icon>videocam_off</Icon>}
+                </Fab>
+              </Tooltip>
+
+              <Tooltip
+                title={allowMic ? 'Desabilitar' : 'Habilitar'}
+                placement="right"
+              >
+                <Fab
+                  className={`transparent btn-audio ${allowMic
+                    ? ''
+                    : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
+                  onClick={() => this.setAllowMic(allowMic)}
+                >
+                  {allowMic ? <Icon>mic</Icon> : <Icon>mic_off</Icon>}
+                </Fab>
+              </Tooltip>
+            </div>
+          : <div className="no-device-found">
+              <h4>Não conseguimos detectar sua câmera ou microfone!</h4>
+              <p>
+                Por favor verifique a instalação da sua câmera ou microfone
+                e&nbsp;
+                <strong>
+                  <a className="pointer" onClick={() => location.reload()}>
+                    RECARREGUE A PÁGINA!
+                  </a>
+                </strong>
+              </p>
+            </div>}
+      </div>
     );
   }
 }
@@ -208,14 +276,23 @@ OTPublisher.defaultProps = {
   onError: null,
 };
 
-OTPublisher.contextTypes = {
-  session: PropTypes.shape({
-    connection: PropTypes.shape({
-      connectionId: PropTypes.string,
-    }),
-    once: PropTypes.func,
-    off: PropTypes.func,
-    publish: PropTypes.func,
-    unpublish: PropTypes.func,
-  }),
+const mapStateToProps = state => ({
+  camera: state.Camera,
+  allowCam: state.AllowCam,
+  microphone: state.Microphone,
+  user: state.session.user,
+  allowMic: state.AllowMic,
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAllowCam: boolean => {
+      dispatch(allowCam(boolean));
+    },
+    onAllowMic: boolean => {
+      dispatch(allowMic(boolean));
+    },
+  };
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(OTPublisher);
