@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
-import Pusher from 'react-pusher';
 import { connect } from 'react-redux';
 import { Fab, Icon } from '@material-ui/core';
 
@@ -148,48 +147,43 @@ class OTSubscriber extends Component {
   }
 
   render() {
-    const { stream, user } = this.props;
+    const { stream } = this.props;
 
     return (
-      stream.videoType != 'screen' && (
-        <div
-          id="subscriber"
-          ref={node => (this.node = node)}
-          className={this.setStreamFull()}
-        >
-          <div className="box-buttons">
-            <Fab
-              className={`transparent btn-video ${
-                this.state.streamSub.hasVideo ? '' : 'inactive'
-              } ${this.state.hideCamMic ? 'no-show' : ''}`}
-            >
-              {this.state.streamSub.hasVideo ? (
-                <Icon>videocam</Icon>
-              ) : (
-                <Icon>videocam_off</Icon>
-              )}
-            </Fab>
+      stream.videoType != 'screen' &&
+      <div
+        id="subscriber"
+        ref={node => (this.node = node)}
+        className={this.setStreamFull()}
+      >
+        <div className="box-buttons">
+          <Fab
+            className={`transparent btn-video ${this.state.streamSub.hasVideo
+              ? ''
+              : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
+          >
+            {this.state.streamSub.hasVideo
+              ? <Icon>videocam</Icon>
+              : <Icon>videocam_off</Icon>}
+          </Fab>
 
-            <Fab
-              className={`transparent btn-audio ${
-                this.state.streamSub.hasAudio ? '' : 'inactive'
-              } ${this.state.hideCamMic ? 'no-show' : ''}`}
-            >
-              {this.state.streamSub.hasAudio ? (
-                <Icon>mic</Icon>
-              ) : (
-                <Icon>mic_off</Icon>
-              )}
-            </Fab>
+          <Fab
+            className={`transparent btn-audio ${this.state.streamSub.hasAudio
+              ? ''
+              : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
+          >
+            {this.state.streamSub.hasAudio
+              ? <Icon>mic</Icon>
+              : <Icon>mic_off</Icon>}
+          </Fab>
 
-            <Pusher
+          {/* <Pusher
               channel={`player_${user.session.code}`}
               event={`hide_cam_mic_${user.session.code}`}
               onUpdate={response => this.setHideCamMic(response.data)}
-            />
-          </div>
+            /> */}
         </div>
-      )
+      </div>
     );
   }
 }
