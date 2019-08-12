@@ -1,3 +1,5 @@
+import { sessionService } from 'redux-react-session';
+
 export const ALLOW_CAM = 'ALLOW_CAM';
 export const ALLOW_MIC = 'ALLOW_MIC';
 export const COUNT_STREAMS = 'COUNT_STREAMS';
@@ -23,5 +25,13 @@ export const streams = object => {
   return {
     type: COUNT_STREAMS,
     object
+  };
+};
+
+// Logout User
+export const logout = () => {
+  return () => {
+    sessionService.deleteSession();
+    sessionService.deleteUser();
   };
 };

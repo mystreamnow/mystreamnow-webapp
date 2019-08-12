@@ -36,11 +36,17 @@ const configureStore = preloadedState => {
   store.dispatch(addTranslation(global));
 
   // Session
+  const validateSession = () => {
+    return true;
+  };
+
   const options = {
     refreshOnCheckAuth: true,
-    redirectPath: '/app',
-    driver: 'LOCALSTORAGE'
+    redirectPath: '/player',
+    driver: 'COOKIES',
+    validateSession
   };
+
   sessionService.initSessionService(store, options);
 
   // Pusher

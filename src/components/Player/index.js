@@ -1,30 +1,44 @@
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import { OTSession, OTStreams } from './TokBox';
 
-const App = () => {
-  return (
-    <Fragment>
-      <OTSession
-        apiKey='46216882'
-        sessionId='2_MX40NjIxNjg4Mn5-MTU2NTMxNzY0NTYxOH5nbzZ2N0V6TzJRTjM4N3FwY0Uwdm1heEh-fg'
-        token='T1==cGFydG5lcl9pZD00NjIxNjg4MiZzaWc9ZDg1NjkzZTU2ZTM5OTUwNjYwMTA0ZjE4NWU1NThjOGE5MmM5MjBhMDpzZXNzaW9uX2lkPTJfTVg0ME5qSXhOamc0TW41LU1UVTJOVE14TnpZME5UWXhPSDVuYnpaMk4wVjZUekpSVGpNNE4zRndZMFV3ZG0xaGVFaC1mZyZjcmVhdGVfdGltZT0xNTY1NDUwOTY0JnJvbGU9bW9kZXJhdG9yJm5vbmNlPTE1NjU0NTA5NjQuNDY1NzE3MjM5MTIzOTU='
-      >
-        <Publisher />
+import './assets/index.scss';
 
-        <OTStreams
-          countStreams={() => {
-            return 1;
-          }}
+const App = ({ user, session }) => {
+  if (user) {
+    const { meeting_session_id, meeting_token } = session;
+
+    return (
+      <Fragment>
+        <OTSession
+          apiKey='46216882'
+          sessionId={meeting_session_id}
+          token={meeting_token}
         >
-          <Subscriber />
-        </OTStreams>
-      </OTSession>
-    </Fragment>
-  );
+          <Publisher />
+
+          <OTStreams
+            countStreams={() => {
+              return 1;
+            }}
+          >
+            <Subscriber />
+          </OTStreams>
+        </OTSession>
+      </Fragment>
+    );
+  } else {
+    return <div>Loading</div>;
+  }
 };
 
-export default withRouter(App);
+const mapStateToProps = state => ({
+  user: state.session.user.me,
+  session: state.session.user.session
+});
+
+export default connect(mapStateToProps)(withRouter(App));

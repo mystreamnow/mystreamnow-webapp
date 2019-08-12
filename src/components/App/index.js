@@ -1,30 +1,55 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import Player from '../Player';
 import Login from '../Login';
+import PrivateRoute from './PrivateRoute';
 // import Page404 from '../Player/Page404';
 
-const App = () => {
+const App = ({ authenticated, checked, history }) => {
   return (
     <Fragment>
-      <Switch>
-        <Route
-          exact
-          path={'/player'}
-          component={() => {
-            return <Player />;
-          }}
-        />
-        <Route
-          exact
-          path={'/:email?/:idroom?'}
-          component={({ match }) => {
-            return <Login match={match} />;
-          }}
-        />
-      </Switch>
+      {checked &&
+        <Switch>
+          <PrivateRoute
+            exact
+            path={'/player'}
+            authenticated={authenticated}
+            component={() => {
+              return <Player />;
+            }}
+          />
+          <Route
+            exact
+            path={'/:idroom?/:email?'}
+            component={({ match }) => {
+              return (
+                <Login
+                  history={history}
+                  authenticated={authenticated}
+                  match={match}
+                />
+              );
+            }}
+          />
+        </Switch>}
     </Fragment>
   );
 };
 
-export default App;
+const { bool } = PropTypes;
+
+App.propTypes = {
+  authenticated: bool.isRequired,
+  checked: bool.isRequired
+};
+
+const mapState = ({ session }) => ({
+  checked: session.checked,
+  authenticated: session.authenticated
+});
+
+export default connect(mapState)(withRouter(App));

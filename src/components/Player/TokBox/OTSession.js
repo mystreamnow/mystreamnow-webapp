@@ -14,7 +14,7 @@ class OTSession extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.createSession();
   }
 

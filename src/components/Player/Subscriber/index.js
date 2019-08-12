@@ -32,8 +32,6 @@ export default class Subscriber extends Component {
   };
 
   render() {
-    console.log(this.props.stream);
-    console.log(this.props.session);
     return (
       <OTSubscriber
         stream={this.props.stream}

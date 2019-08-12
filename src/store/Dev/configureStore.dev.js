@@ -37,12 +37,28 @@ const configureStore = preloadedState => {
   store.dispatch(addTranslation(global));
 
   // Session
+  const validateSession = () => {
+    return true;
+  };
+
   const options = {
     refreshOnCheckAuth: true,
-    redirectPath: '/app',
-    driver: 'LOCALSTORAGE'
+    redirectPath: '/player',
+    driver: 'COOKIES',
+    validateSession
   };
-  sessionService.initSessionService(store, options);
+  sessionService
+    .initSessionService(store, options)
+    .then(() =>
+      console.log(
+        'Redux React Session is ready and a session was refreshed from your storage'
+      )
+    )
+    .catch(() =>
+      console.log(
+        'Redux React Session is ready and there is no session in your storage'
+      )
+    );
 
   // Pusher
   const pusherClient = new Pusher(getEnv('API_PUSHER_KEY'), {
