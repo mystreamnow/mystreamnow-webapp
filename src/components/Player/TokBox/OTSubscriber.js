@@ -131,31 +131,12 @@ class OTSubscriber extends Component {
     this.setState({ hideCamMic: data.hideCamMic });
   };
 
-  setStreamFull() {
-    const userData = JSON.parse(this.props.stream.connection.data);
-
-    if (this.props.streamFull && this.props.streamFull.full) {
-      if (this.props.streamFull.me == userData.email) {
-        const { streamFull } = this.props;
-        return `video full${streamFull.middle ? ' middle' : ''}`;
-      } else {
-        return 'video hide';
-      }
-    }
-
-    return 'video';
-  }
-
   render() {
     const { stream } = this.props;
 
     return (
       stream.videoType != 'screen' &&
-      <div
-        id="subscriber"
-        ref={node => (this.node = node)}
-        className={this.setStreamFull()}
-      >
+      <div id="subscriber" ref={node => (this.node = node)} className={'video'}>
         <div className="box-buttons">
           <Fab
             className={`transparent btn-video ${this.state.streamSub.hasVideo

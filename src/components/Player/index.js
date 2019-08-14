@@ -1,35 +1,20 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Publisher from './Publisher';
-import Subscriber from './Subscriber';
-import { OTSession, OTStreams } from './TokBox';
-
-import './assets/index.scss';
+import ContainerPlayer from './ContainerPlayer';
 
 const App = ({ user, session }) => {
   if (user) {
     const { meeting_session_id, meeting_token } = session;
 
     return (
-      <Fragment>
-        <OTSession
-          apiKey='46216882'
-          sessionId={meeting_session_id}
-          token={meeting_token}
-        >
-          <Publisher />
-
-          <OTStreams
-            countStreams={() => {
-              return 1;
-            }}
-          >
-            <Subscriber />
-          </OTStreams>
-        </OTSession>
-      </Fragment>
+      <div id='container_player'>
+        <ContainerPlayer
+          meeting_session_id={meeting_session_id}
+          meeting_token={meeting_token}
+        />
+      </div>
     );
   } else {
     return <div>Loading</div>;

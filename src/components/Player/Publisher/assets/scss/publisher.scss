@@ -1,0 +1,59 @@
+@import './../../../../../components/Player/assets/index.scss';
+
+#publisher {
+  border: solid 2px #57a9b3;
+  .OT_audio-only {
+    .OT_widget-container {
+      display: flex;
+      font-size: 3vmax;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+
+      &::after {
+        content: 'Câmera ou Microfone desabilitado';
+        background-color: rgba(75, 67, 67, 0.7);
+        padding: 10px 20px;
+        border-radius: 2rem;
+        font-size: 1ch;
+        border: solid 1px;
+      }
+    }
+  }
+
+  .box-buttons {
+    padding: 0.7rem;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-self: flex-start;
+
+    .material-icons {
+      font-size: 1.8rem;
+    }
+
+    .btn-video,
+    .btn-audio {
+      width: 3.7rem;
+      height: 3.7rem;
+      box-shadow: none;
+      font-size: 1.7rem;
+      border: solid 2px #ffffff;
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.25);
+      z-index: 2;
+
+      &.inactive {
+        span {
+          color: rgba(255, 255, 255, 0.7);
+        }
+        border: 1px solid rgba(255, 0, 0, 1);
+        background: rgba(255, 0, 0, 0.3);
+      }
+    }
+
+    .btn-video {
+      margin-bottom: 0.7rem;
+    }
+  }
+}

@@ -202,7 +202,7 @@ class OTPublisher extends Component {
     const { allowCam, allowMic } = this.props;
 
     return (
-      <div id="publisher" ref={node => (this.node = node)}>
+      <div id="publisher" className={'video'} ref={node => (this.node = node)}>
         {this.state.pubError === null
           ? <div className="box-buttons">
               <Tooltip

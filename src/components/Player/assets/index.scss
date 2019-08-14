@@ -8,3 +8,92 @@ body {
     overflow: hidden !important;
   }
 }
+
+#container_player {
+  background-color: black;
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  #body_player {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    #publisher,
+    #subscriber {
+      .OT_publisher,
+      .OT_subscriber {
+        border-radius: 1.5rem;
+      }
+      .OT_bar.OT_edge-bar-item.OT_mode-auto,
+      .OT_name.OT_edge-bar-item.OT_mode-auto {
+        bottom: 0;
+        top: inherit;
+        height: 60px;
+        font-size: 18px;
+        padding-left: 5px;
+
+        .subtitle {
+          font-size: 14px;
+        }
+      }
+
+      .OT_bar {
+        background: rgba(50, 50, 50, 0.5);
+      }
+    }
+
+    .row-participants {
+      display: flex;
+      padding: 1vh 0.6vw;
+      flex-grow: 1;
+
+      &.default {
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        > .video {
+          flex-grow: 0;
+          height: auto;
+          width: 99%;
+
+          &:first-child:nth-last-child(n + 2),
+          &:first-child:nth-last-child(n + 2) ~ * {
+            width: calc((99% / 2) - 10px);
+          }
+
+          &:first-child:nth-last-child(n + 5),
+          &:first-child:nth-last-child(n + 5) ~ * {
+            width: calc((99% / 3) - 10px);
+          }
+
+          &:first-child:nth-last-child(n + 7),
+          &:first-child:nth-last-child(n + 7) ~ * {
+            width: calc((99% / 4) - 10px);
+          }
+
+          &:first-child:nth-last-child(n + 13),
+          &:first-child:nth-last-child(n + 13) ~ * {
+            width: calc((99% / 5) - 10px);
+          }
+        }
+      }
+
+      .video {
+        flex-grow: 1;
+        padding: .4rem;
+        border-radius: 2rem;
+        margin-bottom: 0;
+
+        .OT_root {
+          width: 100% !important;
+          height: 100% !important;
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { OTPublisher } from './../TokBox';
 
+import './assets/scss/publisher.scss';
+
 class Publisher extends Component {
   constructor(props) {
     super(props);
