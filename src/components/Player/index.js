@@ -4,16 +4,11 @@ import { connect } from 'react-redux';
 
 import ContainerPlayer from './ContainerPlayer';
 
-const App = ({ user, session }) => {
+const App = ({ user }) => {
   if (user) {
-    const { meeting_session_id, meeting_token } = session;
-
     return (
       <div id='container_player'>
-        <ContainerPlayer
-          meeting_session_id={meeting_session_id}
-          meeting_token={meeting_token}
-        />
+        <ContainerPlayer />
       </div>
     );
   } else {

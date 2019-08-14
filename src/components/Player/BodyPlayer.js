@@ -4,14 +4,15 @@ import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import { OTSession, OTStreams } from './TokBox';
 import { getEnv } from './../../helper/helper';
+import { connect } from 'react-redux';
 
-const BodyPlayer = ({ meeting_session_id, meeting_token }) => {
+const BodyPlayer = ({ session, token }) => {
   return (
     <div className='row-participants default'>
       <OTSession
         apiKey={getEnv('API_TOKBOX_KEY')}
-        sessionId={meeting_session_id}
-        token={meeting_token}
+        sessionId={session}
+        token={token}
       >
         <Publisher />
 
@@ -27,4 +28,9 @@ const BodyPlayer = ({ meeting_session_id, meeting_token }) => {
   );
 };
 
-export default BodyPlayer;
+const mapStateToProps = state => ({
+  session: state.session.user.session.meeting_session_id,
+  token: state.session.user.session.meeting_token
+});
+
+export default connect(mapStateToProps)(BodyPlayer);

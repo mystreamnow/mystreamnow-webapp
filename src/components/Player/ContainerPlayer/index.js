@@ -3,13 +3,10 @@ import React from 'react';
 import './../assets/index.scss';
 import BodyPlayer from '../BodyPlayer';
 
-const ContainerPlayer = ({ meeting_session_id, meeting_token }) => {
+const ContainerPlayer = () => {
   return (
     <div id='body_player'>
-      <BodyPlayer
-        meeting_session_id={meeting_session_id}
-        meeting_token={meeting_token}
-      />
+      <BodyPlayer />
     </div>
   );
 };

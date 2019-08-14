@@ -3,25 +3,26 @@ import { connect } from 'react-redux';
 import { OTPublisher } from './../TokBox';
 
 import './assets/scss/publisher.scss';
+import Error from './_includes/errors';
 
 class Publisher extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      error: null,
+      error: false,
+      codeError: false,
       fitMode: 'cover',
       videoSource: 'camera',
     };
   }
 
   onError = err => {
-    this.setState({ error: `Failed to publish: ${err.message}` });
-    console.error(err);
+    this.setState({ error: true, codeError: err.code });
   };
 
   render() {
-    const { camera, microphone, allowCam, allowMic } = this.props;
+    const { camera, microphone, allowCam, allowMic, name } = this.props;
 
     let currentCamera = camera ? camera.deviceId : undefined;
     let currentMicrophone = microphone ? microphone.deviceId : undefined;
@@ -33,12 +34,12 @@ class Publisher extends Component {
           session={this.props.session}
           properties={{
             fitMode: this.state.fitMode,
-            name: 'Michael',
+            name: name,
             insertMode: 'replace',
             style: {
               nameDisplayMode: 'auto',
               buttonDisplayMode: 'off',
-              audioLevelDisplayMode: 'off',
+              audioLevelDisplayMode: 'on',
               archiveStatusDisplayMode: 'off',
             },
             mirror: false,
@@ -51,6 +52,7 @@ class Publisher extends Component {
           }}
           onError={this.onError}
         />
+        {this.state.error && <Error code={this.state.codeError} />}
       </React.Fragment>
     );
   }
@@ -61,6 +63,7 @@ const mapStateToProps = state => ({
   allowCam: state.AllowCam,
   microphone: state.Microphone,
   allowMic: state.AllowMic,
+  name: state.session.user.me.name,
 });
 
 export default connect(mapStateToProps)(Publisher);

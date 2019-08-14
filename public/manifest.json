@@ -1,6 +1,6 @@
 {
-  "short_name": "WMDirect",
-  "name": "WMDirect - Reuna sua equipe a qualquer momento e transmita seu evento",
+  "short_name": "MyStreamNow",
+  "name": "My Stream Now - My Stream Now - Você pode agora de forma fácil realizar transmissões de Vídeo para Várias Plataformas de mercado bastando apenas ter o seu navegador ou um transcoder de video.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#0a0c2f",
   "background_color": "#ffffff"
 }
