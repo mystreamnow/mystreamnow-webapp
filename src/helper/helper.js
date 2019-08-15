@@ -7,56 +7,10 @@ export const hydrateObject = object => {
   return rows.data;
 };
 
-export const getUrlMaterial = material => {
-  if (material.type != 5) {
-    return `http://d30c5fmxc9293x.cloudfront.net/s/${material.id}/${
-      material.versionId
-    }/${material.version}/300_300/1/thumbnail.jpg`;
-  } else {
-    return `https://s3-sa-east-1.amazonaws.com/atitude-files${
-      material.thumbSync
-    }`;
-  }
-};
-
-export const _NEW_ = 'NEW';
-export const _SPEAKER_ = 'SPEAKER';
-export const _MODERATOR_ = 'MODERATOR';
-
-export const getEnvUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_URL_PROD;
-  }
-
-  return process.env.REACT_APP_URL_DEV;
-};
-
-export const getApiUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_URL_API_PROD;
-  }
-
-  return process.env.REACT_APP_URL_API_DEV;
-};
-
-export const getAdmUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_URL_ADM_PROD;
-  }
-
-  return process.env.REACT_APP_URL_ADM_DEV;
-};
-
 export const getEnv = name => {
   let env = '';
 
   switch (name) {
-    case 'ATITUDE_LATITUDE':
-      env = parseFloat(process.env.REACT_APP_ATITUDE_LATITUDE);
-      break;
-    case 'ATITUDE_LONGITUDE':
-      env = parseFloat(process.env.REACT_APP_ATITUDE_LONGITUDE);
-      break;
     default:
       env = process.env[`REACT_APP_${name}`];
   }

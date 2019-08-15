@@ -11,12 +11,16 @@ import {
   useTheme
 } from '@material-ui/core';
 
-const ErrorType1500 = () => {
+import { detectBrowser } from './../../../../../helper/helper';
+
+const NotSupported = () => {
   const [open, setOpen] = React.useState(false);
+  const [browser, setBrowser] = React.useState();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
+    setBrowser(detectBrowser());
     setOpen(true);
   }, []);
 
@@ -27,18 +31,23 @@ const ErrorType1500 = () => {
   return (
     <Fragment>
       <Dialog
+        maxWidth={'md'}
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
         aria-labelledby='responsive-dialog-title'
       >
         <DialogTitle id='responsive-dialog-title'>
-          {'Infelizmente não conseguimos detectar sua câmera ou microfone'}
+          Infelizmente o seu navegador ({browser}) não tem suporte para
+          compartilhar tela.
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Para tentar solucionar o problema tente verificar sua permissão de
-            câmera e microfone, veja a seguir como realizar o procedimento:
+            <p>Pedimos a gentileza de utilizar um dos navegadores a seguir:</p>
+            <ul>
+              <li>Google Chrome</li>
+              <li>Firefox</li>
+            </ul>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -55,4 +64,4 @@ const mapStateToProps = state => ({
   name: state.session.user.me.name
 });
 
-export default connect(mapStateToProps)(ErrorType1500);
+export default connect(mapStateToProps)(NotSupported);
