@@ -1,24 +1,8 @@
 import { normalize, schema } from 'normalizr';
 import { camelizeKeys } from 'humps';
-import { sessionService } from 'redux-react-session';
-import { graphCall } from './../helper/graphCall';
 import { getApiUrl } from './../helper/helper';
 
 const API_ROOT = getApiUrl();
-
-const storeSessionPlayer = session => {
-  sessionService
-    .saveSession({ session })
-    .then(() => {
-      sessionService
-        .saveUser({
-          me: session.user[0],
-          session: session,
-        })
-        .then(() => {});
-    })
-    .catch(err => console.error(err));
-};
 
 const callApi = (endpoint, schema, data) => {
   const fullUrl =
@@ -28,53 +12,14 @@ const callApi = (endpoint, schema, data) => {
     return fetch(fullUrl, {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     }).then(response =>
       response.json().then(json => {
         const data = camelizeKeys(json);
 
         return Object.assign({}, normalize(data, schema));
-      }),
-    );
-  } else {
-    const dataLogin = {
-      code: data.code,
-      image: data.image,
-      senha: data.password,
-      email: data.username,
-    };
-
-    const dataValidate = {
-      code: data.code,
-      password: data.password,
-    };
-
-    return graphCall('eventValidate', dataValidate)
-      .then(result => {
-        if (result.data.eventvalidate === 1) {
-          return graphCall('login', dataLogin).then(response => {
-            if (response.hasOwnProperty('errors')) {
-              let url = `/completar/${data.code}/${data.password}/${
-                data.username
-              }`;
-              window.location = url;
-            } else if (response.data.login === null) {
-              let error = { code: data.code, error: 4 };
-              return Object.assign({}, normalize(error, schema));
-            } else {
-              const { login } = response.data;
-              let session = camelizeKeys(login);
-
-              storeSessionPlayer(session, false);
-              return Object.assign({}, normalize(session, schema));
-            }
-          });
-        } else {
-          let error = { code: data.code, error: result.data.eventvalidate };
-          return Object.assign({}, normalize(error, schema));
-        }
       })
-      .catch(error => console.error(`Event Validate Error ${error}`));
+    );
   }
 };
 
@@ -82,22 +27,22 @@ const userSchema = new schema.Entity(
   'user',
   {},
   {
-    idAttribute: user => user.code,
-  },
+    idAttribute: user => user.code
+  }
 );
 
 const triggerPusher = new schema.Entity(
   'trigger',
   {},
   {
-    idAttribute: trigger => trigger.code,
-  },
+    idAttribute: trigger => trigger.code
+  }
 );
 
 export const Schemas = {
   USER: userSchema,
   USER_ARRAY: [userSchema],
-  TRIGGER: triggerPusher,
+  TRIGGER: triggerPusher
 };
 
 export const CALL_API = 'Call API';
@@ -141,15 +86,15 @@ export default store => next => action => {
       next(
         actionWith({
           response,
-          type: successType,
-        }),
+          type: successType
+        })
       ),
     error =>
       next(
         actionWith({
           type: failureType,
-          error: error.message || 'Something bad happened',
-        }),
-      ),
+          error: error.message || 'Something bad happened'
+        })
+      )
   );
 };

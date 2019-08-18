@@ -1,0 +1,23 @@
+#body_player {
+  #col-presentation {
+    display: flex;
+    flex: 2.75;
+    justify-content: center;
+    padding: 1.5vh 1vw 1.5vh 0.4vw;
+
+    &.no-start {
+      position: absolute;
+      display: none;
+    }
+
+    #OTScreenShare {
+      &.presentation {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 1rem;
+        box-shadow: 0 0 7px 0 #000000;
+        background: #000000;
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ body {
 }
 
 #container_player {
-  background-color: black;
+  background-color: rgb(51, 49, 49);
 
   .row {
     margin-bottom: 0;
@@ -80,6 +80,24 @@ body {
           &:first-child:nth-last-child(n + 13),
           &:first-child:nth-last-child(n + 13) ~ * {
             width: calc((99% / 5) - 10px);
+          }
+        }
+      }
+
+      &.cameraWithPresentation {
+        flex: 1;
+        flex-direction: column;
+
+        > .video {
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &.full {
+            &.middle {
+              flex-grow: 0;
+              height: 50% !important;
+            }
           }
         }
       }

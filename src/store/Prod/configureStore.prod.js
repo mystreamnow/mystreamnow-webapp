@@ -6,6 +6,7 @@ import { initialize, addTranslation } from 'react-localize-redux';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import { getEnv } from './../../helper/helper';
+import api from './../../middleware/api';
 import rootReducer from './../../reducers';
 import global from './../../lang/global.json';
 
@@ -24,7 +25,7 @@ const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(thunk, sagaMiddleware)
+    applyMiddleware(thunk, api, sagaMiddleware)
   );
 
   // Dispatchs
@@ -51,7 +52,7 @@ const configureStore = preloadedState => {
 
   // Pusher
   const pusherClient = new Pusher(getEnv('API_PUSHER_KEY'), {
-    cluster: 'mt1'
+    cluster: 'us2'
   });
 
   setPusherClient(pusherClient);

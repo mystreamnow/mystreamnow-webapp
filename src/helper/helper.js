@@ -18,6 +18,14 @@ export const getEnv = name => {
   return env;
 };
 
+export const getApiUrl = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return process.env.REACT_APP_URL_API_PROD;
+  }
+
+  return process.env.REACT_APP_URL_API_DEV;
+};
+
 export const jsonValid = str => {
   try {
     JSON.parse(str);
