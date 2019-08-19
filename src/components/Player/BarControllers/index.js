@@ -87,7 +87,7 @@ class BarControllers extends Component {
               }
             },
           );
-
+          this.props.onScreenShare(true);
           this.Listener(this.screenSharePublisher);
         }
       });
@@ -119,14 +119,11 @@ class BarControllers extends Component {
           layout: this.props.layout.class[1],
           me: this.props.email,
         });
-
-        this.props.onScreenShare(true);
       },
     });
   }
 
   setLayout = ({ layout }) => {
-    this.addNodeScreenShare();
     if (this.props.layout.active !== layout) {
       this.props.onLayout({
         class: this.props.layout.class,

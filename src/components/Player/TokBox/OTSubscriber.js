@@ -68,13 +68,23 @@ class OTSubscriber extends Component {
       return;
     }
 
-    const container = document.createElement('div');
-    if (this.props.stream.videoType != 'screen') {
-      container.setAttribute(
+    const divSubscriber = document.createElement('div');
+
+    if (this.props.stream.videoType == 'camera') {
+      divSubscriber.setAttribute(
         'class',
         `OTSubscriberContainer sub_${this.props.stream.id}`,
       );
-      this.node.appendChild(container);
+      this.node.appendChild(divSubscriber);
+    }
+
+    if (this.props.stream.videoType == 'screen') {
+      const ColParticipants = document.getElementById('col-presentation');
+
+      divSubscriber.setAttribute('id', 'OTScreenShare');
+      divSubscriber.setAttribute('class', 'presentation screen-share-bg');
+
+      ColParticipants.appendChild(divSubscriber);
     }
 
     this.subscriberId = uuid();
@@ -82,7 +92,7 @@ class OTSubscriber extends Component {
 
     const subscriber = this.props.session.subscribe(
       this.props.stream,
-      this.props.stream.videoType == 'screen' ? 'OTScreenShare' : container,
+      divSubscriber,
       this.props.properties,
       err => {
         if (subscriberId !== this.subscriberId) {
