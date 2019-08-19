@@ -93,7 +93,6 @@
     "pusher-js": "^4.4.0",
     "raf": "3.4.1",
     "react": "^16.9.0",
-    "react-apollo": "^2.5.5",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dev-utils": "^5.0.0",
     "react-display-name": "^0.2.4",
