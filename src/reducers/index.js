@@ -3,6 +3,7 @@ import { localeReducer } from 'react-localize-redux';
 import { sessionReducer } from 'redux-react-session';
 import AllowCam from './allowCam';
 import AllowMic from './allowMic';
+import AllowAspectRatio from './aspectRatio';
 import OpentokSession from './opentokSession';
 import Layout from './layout';
 import { ScreenShare } from './screenShare';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   Layout,
   entities,
   ScreenShare,
+  aspectratio: AllowAspectRatio,
   AllowCam,
   AllowMic
 });

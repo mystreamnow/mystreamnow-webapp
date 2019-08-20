@@ -6,6 +6,7 @@ export const COUNT_STREAMS = 'COUNT_STREAMS';
 export const OPENTOKSESSION = 'OPENTOKSESSION';
 export const SCREEN_SHARE = 'SCREEN_SHARE';
 export const LAYOUT = 'LAYOUT';
+export const ASPECT_RATIO = 'ASPECT_RATIO';
 
 // Eneble or disable CAM
 export const allowCam = boolean => {
@@ -51,6 +52,14 @@ export const opentokSession = object => {
 export const screenShare = boolean => {
   return {
     type: SCREEN_SHARE,
+    boolean
+  };
+};
+
+// Aspect Ratio
+export const aspectRatio = boolean => {
+  return {
+    type: ASPECT_RATIO,
     boolean
   };
 };
