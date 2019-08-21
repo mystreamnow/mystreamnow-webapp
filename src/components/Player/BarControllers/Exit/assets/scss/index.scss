@@ -1,0 +1,26 @@
+#exit-component {
+  .btn-control {
+    height: 7.5vh;
+    color: #fff;
+    padding: 3px 1.27rem;
+    border-radius: 3rem;
+    background: rgba(210, 77, 87, 1);
+
+    > span {
+      flex-direction: column;
+
+      .btn-cb-icon {
+        font-size: 1.9rem;
+      }
+
+      .btn-cb-label {
+        width: 100%;
+        font-size: 1ch;
+
+        > span {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}

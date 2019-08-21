@@ -16,7 +16,9 @@ import Invite from './Invite/Invite';
 import Config from './Config/Config';
 import Chat from './Chat/Chat';
 import Help from './Help/Help';
+import Infos from './Infos/Infos';
 import LiveStreaming from './LiveStreaming/LiveStreaming';
+import Exit from './Exit/Exit';
 
 class BarControllers extends Component {
   constructor(props) {
@@ -160,6 +162,7 @@ class BarControllers extends Component {
     return (
       <div id="bar-controllers">
         <div id="controls">
+          <Infos />
           <div className="control">
             <LiveStreaming />
 
@@ -219,6 +222,7 @@ class BarControllers extends Component {
 
             <Help />
           </div>
+          <Exit />
         </div>
 
         <Pusher
