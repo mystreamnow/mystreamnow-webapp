@@ -8,35 +8,25 @@ import {
   DialogActions,
   useMediaQuery,
   Slide,
-  Grid,
-  Fab,
-  CardActionArea,
-  Card,
-  CardMedia,
-  CardContent
+  Fab
 } from '@material-ui/core';
 
-import { useTheme, makeStyles } from '@material-ui/core/styles';
-import Send from '@material-ui/icons/Send';
+import './assets/scss/StartStreaming.scss';
+
+import { useTheme } from '@material-ui/core/styles';
+
+import PlayArrow from '@material-ui/icons/PlayArrow';
+
 const Transition = React.forwardRef(function Transition (props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
-const useStyles = makeStyles(theme => ({
-  Send: {
-    marginRight: theme.spacing(1)
-  },
-  card: {
-    maxWidth: 345
-  },
-  media: {
-    height: 263
-  }
-}));
+
+import ContainerLayout from './ContainerLayout/ContainerLayout';
+import LocaleTransmission from './LocaleTransmission/LocaleTransmission';
 
 const StartStreaming = ({ open, setOpen }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const classes = useStyles();
 
   function handleClose () {
     setOpen(false);
@@ -58,44 +48,8 @@ const StartStreaming = ({ open, setOpen }) => {
         <DialogContentText>
           Escolha o layout que você deseja iniciar sua transmissão:
         </DialogContentText>
-        <Grid container justify='center' alignItems='center' direction='row'>
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image='/img/bestfit.png'
-                  title='My Stream Now - Streaming Bestfit'
-                />
-                <CardContent>Melhor disposição de câmeras</CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image='/img/verticalPresentation.png'
-                  title='My Stream Now - Vertical Presentation'
-                />
-                <CardContent>Layout com apresentação vertical</CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image='/img/horizontalPresentation.png'
-                  title='My Stream Now - Horizontal Presentation'
-                />
-                <CardContent>Layout com apresentação horizontal</CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        </Grid>
+        <ContainerLayout />
+        <LocaleTransmission />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color='secondary'>
@@ -107,8 +61,8 @@ const StartStreaming = ({ open, setOpen }) => {
           onClick={handleClose}
           color='primary'
         >
-          <Send className={classes.Send} />
-          Enviar
+          <PlayArrow className='send' />
+          Iniciar transmissão
         </Fab>
       </DialogActions>
     </Dialog>

@@ -1,31 +1,16 @@
 import React from 'react';
-
-import Publisher from './Publisher';
-import Subscriber from './Subscriber';
-import { OTSession, OTStreams } from './TokBox';
-import { getEnv } from './../../helper/helper';
 import { connect } from 'react-redux';
+
+import Player from './Player';
+import LoadingModal from './HelperComponents/LoadingModal/LoadingModal';
 
 const BodyPlayer = ({ session, token, layout }) => {
   return (
     <React.Fragment>
       <div className={`row-participants ${layout.active}`}>
-        <OTSession
-          apiKey={getEnv('API_TOKBOX_KEY')}
-          sessionId={session}
-          token={token}
-        >
-          <Publisher />
-
-          <OTStreams
-            countStreams={() => {
-              return 1;
-            }}
-          >
-            <Subscriber />
-          </OTStreams>
-        </OTSession>
+        <Player session={session} token={token} />
       </div>
+      <LoadingModal />
     </React.Fragment>
   );
 };

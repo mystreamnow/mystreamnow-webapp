@@ -5,6 +5,7 @@ export const ALLOW_MIC = 'ALLOW_MIC';
 export const COUNT_STREAMS = 'COUNT_STREAMS';
 export const OPENTOKSESSION = 'OPENTOKSESSION';
 export const SCREEN_SHARE = 'SCREEN_SHARE';
+export const CONNECTED_SESSION = 'CONNECTED_SESSION';
 export const LAYOUT = 'LAYOUT';
 export const ASPECT_RATIO = 'ASPECT_RATIO';
 
@@ -69,5 +70,13 @@ export const layout = object => {
   return {
     type: LAYOUT,
     object
+  };
+};
+
+// Connected
+export const connectedSession = boolean => {
+  return {
+    type: CONNECTED_SESSION,
+    boolean
   };
 };

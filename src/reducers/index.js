@@ -4,6 +4,7 @@ import { sessionReducer } from 'redux-react-session';
 import AllowCam from './allowCam';
 import AllowMic from './allowMic';
 import AllowAspectRatio from './aspectRatio';
+import ConnectedUser from './connectedUser';
 import OpentokSession from './opentokSession';
 import Layout from './layout';
 import { ScreenShare } from './screenShare';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   entities,
   ScreenShare,
   aspectratio: AllowAspectRatio,
+  connecteduser: ConnectedUser,
   AllowCam,
   AllowMic
 });
