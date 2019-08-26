@@ -48,9 +48,7 @@ class Request {
   }
 
   async post (url, data) {
-    return await this.Axios.post(url, data, {
-      Authorization: `Bearer ${this.getToken()}`
-    });
+    return await this.Axios.post(url, data);
   }
 
   async postPrivate (url, data, token) {

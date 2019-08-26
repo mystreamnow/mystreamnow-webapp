@@ -7,6 +7,8 @@ import AllowAspectRatio from './aspectRatio';
 import ConnectedUser from './connectedUser';
 import OpentokSession from './opentokSession';
 import Layout from './layout';
+import LayoutBroadcast from './layoutBroadcast';
+import broadcastingStart from './broadcasting';
 import { ScreenShare } from './screenShare';
 import { entities } from './entities';
 
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   ScreenShare,
   aspectratio: AllowAspectRatio,
   connecteduser: ConnectedUser,
+  layoutbroadcast: LayoutBroadcast,
+  broadcastingStart,
   AllowCam,
   AllowMic
 });

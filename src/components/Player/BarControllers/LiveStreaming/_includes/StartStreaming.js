@@ -1,28 +1,17 @@
 import React from 'react';
-import {
-  DialogTitle,
-  DialogContentText,
-  DialogContent,
-  Button,
-  Dialog,
-  DialogActions,
-  useMediaQuery,
-  Slide,
-  Fab
-} from '@material-ui/core';
-
-import './assets/scss/StartStreaming.scss';
+import { connect } from 'react-redux';
+import { DialogTitle, Dialog, useMediaQuery, Slide } from '@material-ui/core';
 
 import { useTheme } from '@material-ui/core/styles';
 
-import PlayArrow from '@material-ui/icons/PlayArrow';
+import './assets/scss/StartStreaming.scss';
 
 const Transition = React.forwardRef(function Transition (props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-import ContainerLayout from './ContainerLayout/ContainerLayout';
-import LocaleTransmission from './LocaleTransmission/LocaleTransmission';
+import DialogActionsBroadcasting from './../_includes/DialogActionsBroadcasting/DialogActionsBroadcasting';
+import DialogContentBroadcasting from './../_includes/DialogContentBroadcasting/DialogContentBroadcasting';
 
 const StartStreaming = ({ open, setOpen }) => {
   const theme = useTheme();
@@ -44,29 +33,16 @@ const StartStreaming = ({ open, setOpen }) => {
       aria-labelledby='form-dialog-title'
     >
       <DialogTitle id='form-dialog-title'>Layout da transmissão</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Escolha o layout que você deseja iniciar sua transmissão:
-        </DialogContentText>
-        <ContainerLayout />
-        <LocaleTransmission />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color='secondary'>
-          Cancelar
-        </Button>
-        <Fab
-          aria-label='send'
-          variant='extended'
-          onClick={handleClose}
-          color='primary'
-        >
-          <PlayArrow className='send' />
-          Iniciar transmissão
-        </Fab>
-      </DialogActions>
+      <DialogContentBroadcasting />
+      <DialogActionsBroadcasting handleClose={handleClose} />
     </Dialog>
   );
 };
 
-export default StartStreaming;
+const mapState = state => {
+  return {
+    layoutbroadcast: state.layoutbroadcast
+  };
+};
+
+export default connect(mapState)(StartStreaming);

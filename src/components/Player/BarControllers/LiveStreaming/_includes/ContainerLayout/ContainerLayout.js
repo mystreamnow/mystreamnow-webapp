@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   CardActionArea,
@@ -10,51 +10,23 @@ import { connect } from 'react-redux';
 
 import Checked from '../../../../HelperComponents/Checked/Checked';
 
-const ContainerLayout = ({ screenshare }) => {
-  const [layoutChecked, setLayout] = React.useState({
-    bestfit: false,
-    vertical: false,
-    horizontal: false
-  });
+import { layoutBroadcast } from './../../../../../../actions/Player';
 
-  function handleLayoutBestfit () {
-    setLayout({
-      bestfit: !layoutChecked.bestfit
+const ContainerLayout = ({ screenshare, layoutbroadcast, onLayout }) => {
+  useEffect(
+    () => {
+      console.log(layoutbroadcast);
+    },
+    [layoutbroadcast]
+  );
+
+  function handleLayout (layout) {
+    onLayout({
+      active: layoutbroadcast.active !== layout ? layout : ''
     });
-
-    setTimeout(function () {
-      setLayout({
-        bestfit: true,
-        loadingChecked: true
-      });
-    }, 1000);
   }
 
-  function handleLayoutVertical () {
-    setLayout({
-      vertical: !layoutChecked.vertical
-    });
-
-    setTimeout(function () {
-      setLayout({
-        vertical: true,
-        loadingChecked: true
-      });
-    }, 1000);
-  }
-
-  function handleLayoutHorizontal () {
-    setLayout({
-      horizontal: !layoutChecked.horizontal
-    });
-
-    setTimeout(function () {
-      setLayout({
-        horizontal: true,
-        loadingChecked: true
-      });
-    }, 1000);
-  }
+  const { active } = layoutbroadcast;
 
   return (
     <div id='containerLayout'>
@@ -62,12 +34,12 @@ const ContainerLayout = ({ screenshare }) => {
         {screenshare === false &&
           <Grid item xs={10} sm={5} lg={4} xl={4}>
             <Card
-              onClick={handleLayoutBestfit}
-              className={`card ${layoutChecked.bestfit ? 'active' : ''}`}
+              onClick={() => handleLayout('bestFit')}
+              className={`card ${active === 'bestFit' ? 'active' : ''}`}
             >
               <CardActionArea>
-                {layoutChecked.bestfit
-                  ? <Checked checked={layoutChecked.loadingChecked}>
+                {active === 'bestFit'
+                  ? <Checked checked={active === 'bestFit'}>
                     <CardMedia
                       className='media'
                       image='/img/bestfit.png'
@@ -89,12 +61,14 @@ const ContainerLayout = ({ screenshare }) => {
         {screenshare &&
           <Grid item xs={10} sm={5} lg={4} xl={4}>
             <Card
-              onClick={handleLayoutVertical}
-              className={`card ${layoutChecked.vertical ? 'active' : ''}`}
+              onClick={() => handleLayout('verticalPresentation')}
+              className={`card ${active === 'verticalPresentation'
+                ? 'active'
+                : ''}`}
             >
               <CardActionArea>
-                {layoutChecked.vertical
-                  ? <Checked checked={layoutChecked.loadingChecked}>
+                {active === 'verticalPresentation'
+                  ? <Checked checked={active === 'verticalPresentation'}>
                     <CardMedia
                       className='media'
                       image='/img/verticalPresentation.png'
@@ -116,12 +90,14 @@ const ContainerLayout = ({ screenshare }) => {
         {screenshare &&
           <Grid item xs={10} sm={5} lg={4} xl={4}>
             <Card
-              onClick={handleLayoutHorizontal}
-              className={`card ${layoutChecked.horizontal ? 'active' : ''}`}
+              onClick={() => handleLayout('horizontalPresentation')}
+              className={`card ${active === 'horizontalPresentation'
+                ? 'active'
+                : ''}`}
             >
               <CardActionArea>
-                {layoutChecked.horizontal
-                  ? <Checked checked={layoutChecked.loadingChecked}>
+                {active === 'horizontalPresentation'
+                  ? <Checked checked={active === 'horizontalPresentation'}>
                     <CardMedia
                       className='media'
                       image='/img/horizontalPresentation.png'
@@ -147,8 +123,17 @@ const ContainerLayout = ({ screenshare }) => {
 
 const mapState = state => {
   return {
-    screenshare: state.ScreenShare
+    screenshare: state.ScreenShare,
+    layoutbroadcast: state.layoutbroadcast
   };
 };
 
-export default connect(mapState)(ContainerLayout);
+const mapDispatchToProps = dispatch => {
+  return {
+    onLayout: number => {
+      dispatch(layoutBroadcast(number));
+    }
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(ContainerLayout);

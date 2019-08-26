@@ -1,0 +1,9 @@
+#video_pre_view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .player_video {
+    width: 60%;
+  }
+}

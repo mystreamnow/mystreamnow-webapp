@@ -50,7 +50,9 @@ export default function * getSession (props) {
           meeting_session_id: data.meeting_session_id,
           meeting_title: data.meeting_title,
           meeting_token: data.meeting_token,
-          meeting_waiting_room: data.meeting_waiting_room
+          meeting_waiting_room: data.meeting_waiting_room,
+          meeting_broadcasting: data.meeting_broadcasting,
+          meeting_broadcasting_check: data.meeting_broadcasting_check
         }
       };
 

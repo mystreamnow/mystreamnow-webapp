@@ -7,7 +7,9 @@ export const OPENTOKSESSION = 'OPENTOKSESSION';
 export const SCREEN_SHARE = 'SCREEN_SHARE';
 export const CONNECTED_SESSION = 'CONNECTED_SESSION';
 export const LAYOUT = 'LAYOUT';
+export const LAYOUT_BROADCAST = 'LAYOUT_BROADCAST';
 export const ASPECT_RATIO = 'ASPECT_RATIO';
+export const REQUEST_BROADCASTING_START = 'REQUEST_BROADCASTING_START';
 
 // Eneble or disable CAM
 export const allowCam = boolean => {
@@ -73,6 +75,14 @@ export const layout = object => {
   };
 };
 
+// Layout da transmissão
+export const layoutBroadcast = object => {
+  return {
+    type: LAYOUT_BROADCAST,
+    object
+  };
+};
+
 // Connected
 export const connectedSession = boolean => {
   return {
@@ -80,3 +90,10 @@ export const connectedSession = boolean => {
     boolean
   };
 };
+
+// Request Start Broadcasting
+export function startBroadcasting () {
+  return {
+    type: REQUEST_BROADCASTING_START
+  };
+}

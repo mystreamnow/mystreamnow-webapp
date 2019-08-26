@@ -164,7 +164,7 @@ class BarControllers extends Component {
         <div id="controls">
           <Infos />
           <div className="control">
-            <LiveStreaming />
+            {session.meeting_broadcasting_check && <LiveStreaming />}
 
             <Tooltip
               title={
