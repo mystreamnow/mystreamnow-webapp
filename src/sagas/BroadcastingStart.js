@@ -5,21 +5,23 @@ function apiGetToken (email) {
   return Request.getToken(email);
 }
 
-function apiStartBroadcasting (params, token) {
+function apiStartBroadcasting (params, token, layout) {
   const { meeting_session_id, meeting_id } = params;
 
   return Request.postPrivate(
     'broadcasting/start',
     {
       session: meeting_session_id,
-      videoconference_id: meeting_id
+      videoconference_id: meeting_id,
+      layout: layout.active
     },
     token
   );
 }
 
-export default function * Broadcasting () {
+export default function * BroadcastingStart () {
   const sessionCookie = yield select(state => state.session);
+  const layout = yield select(state => state.layoutbroadcast);
 
   try {
     const responseToken = yield call(apiGetToken, sessionCookie.user.me.email);
@@ -29,7 +31,8 @@ export default function * Broadcasting () {
       const { data } = yield call(
         apiStartBroadcasting,
         sessionCookie.user.session,
-        tokenApi
+        tokenApi,
+        layout
       );
 
       yield put({
@@ -37,6 +40,12 @@ export default function * Broadcasting () {
         payload: {
           data
         }
+      });
+
+      let boolean = true;
+      yield put({
+        type: 'BROADCASTING_ON',
+        boolean
       });
     }
   } catch (err) {

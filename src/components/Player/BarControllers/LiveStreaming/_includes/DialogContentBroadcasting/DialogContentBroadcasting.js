@@ -6,10 +6,10 @@ import ContainerLayout from './../ContainerLayout/ContainerLayout';
 import LocaleTransmission from './../LocaleTransmission/LocaleTransmission';
 import Player from './Player';
 
-const DialogContentBroadcasting = ({ broadcastingstartloading, hls }) => {
+const DialogContentBroadcasting = ({ broadcastingon, hls }) => {
   return (
     <Fragment>
-      {broadcastingstartloading
+      {!broadcastingon
         ? <DialogContent>
           <DialogContentText>
               Escolha o layout que você deseja iniciar sua transmissão:
@@ -31,7 +31,7 @@ const DialogContentBroadcasting = ({ broadcastingstartloading, hls }) => {
 const mapState = state => {
   return {
     layoutbroadcast: state.layoutbroadcast,
-    broadcastingstartloading: state.broadcastingStart.loading,
+    broadcastingon: state.broadcastingon,
     hls: state.broadcastingStart.data.hls
   };
 };

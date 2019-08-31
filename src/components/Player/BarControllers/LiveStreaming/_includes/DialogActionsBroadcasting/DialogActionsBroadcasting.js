@@ -8,28 +8,39 @@ import {
 } from '@material-ui/core';
 
 import { PlayArrow, Stop } from '@material-ui/icons';
-import { startBroadcasting } from './../../../../../../actions/Player';
+import {
+  startBroadcasting,
+  stopBroadcasting
+} from './../../../../../../actions/Player';
 
 const DialogActionsBroadcasting = ({
-  broadcastingstartloading,
+  broadcastingon,
   layoutbroadcast,
   onBroadcastingStart,
+  onBroadcastingStop,
   handleClose
 }) => {
   const [loadingStart, setLoadingStart] = useState(false);
+  const [loadingStop, setLoadingStop] = useState(false);
 
   function handleStartBroadcasting () {
     setLoadingStart(true);
     onBroadcastingStart();
   }
 
+  function handleStopBroadcasting () {
+    setLoadingStop(false);
+    onBroadcastingStop();
+  }
+
   return (
     <Fragment>
-      {broadcastingstartloading
+      {!broadcastingon
         ? <DialogActions>
+          {!loadingStart &&
           <Button onClick={handleClose} color='secondary'>
-              Cancelar
-            </Button>
+                Cancelar
+              </Button>}
           {loadingStart
               ? <div id='progress_broadcasting_start'>
                 <CircularProgress />
@@ -49,15 +60,19 @@ const DialogActionsBroadcasting = ({
           <Button onClick={handleClose} color='secondary'>
               Fechar
             </Button>
-          <Fab
-            aria-label='send'
-            variant='extended'
-            onClick={handleClose}
-            color='secondary'
-            >
-            <Stop className='send' />
-              Parar a transmissão
-            </Fab>
+          {loadingStop
+              ? <div id='progress_broadcasting_start'>
+                <CircularProgress />
+              </div>
+              : <Fab
+                aria-label='send'
+                variant='extended'
+                onClick={handleStopBroadcasting}
+                color='secondary'
+                >
+                <Stop className='send' />
+                  Parar a transmissão
+                </Fab>}
         </DialogActions>}
     </Fragment>
   );
@@ -66,7 +81,7 @@ const DialogActionsBroadcasting = ({
 const mapState = state => {
   return {
     layoutbroadcast: state.layoutbroadcast,
-    broadcastingstartloading: state.broadcastingStart.loading
+    broadcastingon: state.broadcastingon
   };
 };
 
@@ -74,6 +89,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onBroadcastingStart: () => {
       dispatch(startBroadcasting());
+    },
+    onBroadcastingStop: () => {
+      dispatch(stopBroadcasting());
     }
   };
 };

@@ -9,7 +9,9 @@ export const CONNECTED_SESSION = 'CONNECTED_SESSION';
 export const LAYOUT = 'LAYOUT';
 export const LAYOUT_BROADCAST = 'LAYOUT_BROADCAST';
 export const ASPECT_RATIO = 'ASPECT_RATIO';
+export const BROADCASTING_ON = 'BROADCASTING_ON';
 export const REQUEST_BROADCASTING_START = 'REQUEST_BROADCASTING_START';
+export const REQUEST_BROADCASTING_STOP = 'REQUEST_BROADCASTING_STOP';
 
 // Eneble or disable CAM
 export const allowCam = boolean => {
@@ -97,3 +99,18 @@ export function startBroadcasting () {
     type: REQUEST_BROADCASTING_START
   };
 }
+
+// Request Stop Broadcasting
+export function stopBroadcasting () {
+  return {
+    type: REQUEST_BROADCASTING_STOP
+  };
+}
+
+// Broadcasting On
+export const broadcastingOn = boolean => {
+  return {
+    type: BROADCASTING_ON,
+    boolean
+  };
+};
