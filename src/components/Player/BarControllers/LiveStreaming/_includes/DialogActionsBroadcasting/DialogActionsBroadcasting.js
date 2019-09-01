@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Button,
-  DialogActions,
-  CircularProgress,
-  Fab
-} from '@material-ui/core';
 
-import { PlayArrow, Stop } from '@material-ui/icons';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Fab from '@material-ui/core/Fab';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import Stop from '@material-ui/icons/Stop';
+
 import {
   startBroadcasting,
   stopBroadcasting
@@ -24,12 +24,14 @@ const DialogActionsBroadcasting = ({
   const [loadingStop, setLoadingStop] = useState(false);
 
   function handleStartBroadcasting () {
+    setLoadingStop(false);
     setLoadingStart(true);
     onBroadcastingStart();
   }
 
   function handleStopBroadcasting () {
-    setLoadingStop(false);
+    setLoadingStart(false);
+    setLoadingStop(true);
     onBroadcastingStop();
   }
 
@@ -57,9 +59,10 @@ const DialogActionsBroadcasting = ({
                 </Fab>}
         </DialogActions>
         : <DialogActions>
+          {!loadingStop &&
           <Button onClick={handleClose} color='secondary'>
-              Fechar
-            </Button>
+                Fechar
+              </Button>}
           {loadingStop
               ? <div id='progress_broadcasting_start'>
                 <CircularProgress />

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Icon, Box } from '@material-ui/core';
+
+import Icon from '@material-ui/core/Icon';
+import Box from '@material-ui/core/Box';
 
 import './assets/scss/Infos.scss';
 

@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { DialogTitle, Dialog, useMediaQuery, Slide } from '@material-ui/core';
+
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Slide from '@material-ui/core/Slide';
 
 import { useTheme } from '@material-ui/core/styles';
 

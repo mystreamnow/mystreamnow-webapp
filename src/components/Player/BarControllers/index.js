@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Pusher from 'react-pusher';
 import OT from '@opentok/client';
-import { Tooltip, Grid, Icon, CircularProgress } from '@material-ui/core';
+
+import Tooltip from '@material-ui/core/Tooltip';
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import IconButton from '@material-ui/core/IconButton';
 
 import './assets/scss/index.scss';
@@ -43,10 +48,14 @@ class BarControllers extends Component {
     this.setState({
       loadingSreenShare: true,
     });
-    this.pusherTrigger('layout', {
-      layout: this.props.layout.class[0],
-      me: this.props.email,
-    });
+    this.pusherTrigger(
+      'layout',
+      {
+        layout: this.props.layout.class[0],
+        me: this.props.email,
+      },
+      false,
+    );
     this.props.onScreenShare(false);
   };
 
@@ -116,13 +125,16 @@ class BarControllers extends Component {
     }
   };
 
-  pusherTrigger = (event, data) => {
-    const { meeting_identified_room } = this.props.session;
+  pusherTrigger = (event, data, requestType) => {
+    const { meeting_identified_room, meeting_id } = this.props.session;
 
     Request.post('no-auth/trigger', {
       channel: `player_${meeting_identified_room}`,
       event: `${event}_${meeting_identified_room}`,
       data: data,
+      active: requestType,
+      type: 'screenshare',
+      meeting_id,
     });
   };
 
@@ -138,10 +150,14 @@ class BarControllers extends Component {
         this.setState({
           loadingSreenShare: true,
         });
-        this.pusherTrigger('layout', {
-          layout: this.props.layout.class[1],
-          me: this.props.email,
-        });
+        this.pusherTrigger(
+          'layout',
+          {
+            layout: this.props.layout.class[1],
+            me: this.props.email,
+          },
+          true,
+        );
       },
     });
   }

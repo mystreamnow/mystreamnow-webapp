@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
-import { Tooltip, Grid, Icon } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 
 const Config = () => {

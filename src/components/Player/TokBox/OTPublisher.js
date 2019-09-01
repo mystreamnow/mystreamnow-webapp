@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import once from 'lodash/once';
 import uuid from 'uuid';
-import OT from '@opentok/client';
+import { initPublisher } from '@opentok/client';
 import { connect } from 'react-redux';
 import { Fab, Icon, Tooltip } from '@material-ui/core';
 import { allowCam, allowMic } from './../../../actions/Player';
@@ -151,7 +151,7 @@ class OTPublisher extends Component {
       }
     });
 
-    const publisher = OT.initPublisher(container, properties, err => {
+    const publisher = initPublisher(container, properties, err => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks

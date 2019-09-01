@@ -3,7 +3,6 @@ import React from 'react';
 import './assets/scss/Checked.scss';
 
 const Checked = ({ children, checked }) => {
-  console.log(checked);
   return (
     <div className='container_circle_loader'>
       {!checked

@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Box, Tooltip, IconButton, Icon } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 import './assets/scss/index.scss';
 

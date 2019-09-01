@@ -1,12 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import { sessionService } from 'redux-react-session';
-import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 import { initialize, addTranslation } from 'react-localize-redux';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import { getEnv } from './../../helper/helper';
-import api from './../../middleware/api';
 import rootReducer from './../../reducers';
 import global from './../../lang/global.json';
 
@@ -25,7 +24,7 @@ const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(thunk, api, sagaMiddleware)
+    applyMiddleware(thunk, sagaMiddleware)
   );
 
   // Dispatchs

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { DialogContentText, DialogContent } from '@material-ui/core';
+
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContent from '@material-ui/core/DialogContent';
 
 import ContainerLayout from './../ContainerLayout/ContainerLayout';
 import LocaleTransmission from './../LocaleTransmission/LocaleTransmission';
