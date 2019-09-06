@@ -128,6 +128,14 @@ class BarControllers extends Component {
   pusherTrigger = (event, data, requestType) => {
     const { meeting_identified_room, meeting_id } = this.props.session;
 
+    const { broadcastingon, layout, layoutbroadcast } = this.props;
+
+    let layoutPresentation = this.getLayoutBroadCast(
+      broadcastingon,
+      layout,
+      layoutbroadcast,
+    );
+
     Request.post('no-auth/trigger', {
       channel: `player_${meeting_identified_room}`,
       event: `${event}_${meeting_identified_room}`,
@@ -135,8 +143,36 @@ class BarControllers extends Component {
       active: requestType,
       type: 'screenshare',
       meeting_id,
+      broadcastingon,
+      layoutPresentation,
     });
   };
+
+  getLayoutBroadCast(broadcastingon, layout, layoutbroadcast) {
+    let layoutPresentation = '';
+    if (broadcastingon) {
+      if (
+        layout.active == 'cameraWithPresentation' &&
+        layoutbroadcast.active == 'bestFit'
+      ) {
+        layoutPresentation = 'bestFit';
+      } else if (
+        layout.active == 'default' &&
+        layoutbroadcast.active == 'bestFit'
+      ) {
+        layoutPresentation = 'horizontalPresentation';
+      } else if (
+        layout.active == 'default' &&
+        layoutbroadcast.active == 'verticalPresentation'
+      ) {
+        layoutPresentation = 'verticalPresentation';
+      } else {
+        layoutPresentation = 'bestFit';
+      }
+    }
+
+    return layoutPresentation;
+  }
 
   Listener(screenSharePublisher) {
     screenSharePublisher.on({
@@ -259,6 +295,8 @@ const mapState = state => {
     screenshare: state.ScreenShare,
     aspectratio: state.aspectratio,
     email: state.session.user.me.email,
+    broadcastingon: state.broadcastingon,
+    layoutbroadcast: state.layoutbroadcast,
   };
 };
 
