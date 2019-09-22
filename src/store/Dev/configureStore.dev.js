@@ -31,7 +31,7 @@ const configureStore = preloadedState => {
   // Dispatchs
   store.dispatch(
     initialize(LANGUAGES, {
-      defaultLanguage: navigator.language || navigator.userLanguage
+      defaultLanguage: 'pt-BR'
     })
   );
   store.dispatch(addTranslation(global));
