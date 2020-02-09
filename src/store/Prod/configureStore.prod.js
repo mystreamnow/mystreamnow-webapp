@@ -13,7 +13,7 @@ import global from './../../lang/global.json';
 const LANGUAGES = [
   { name: 'PT', code: 'pt-BR' },
   { name: 'EN', code: 'en-US' },
-  { name: 'ES', code: 'es' }
+  { name: 'ES', code: 'es' },
 ];
 
 import rootSaga from './../saga';
@@ -24,14 +24,17 @@ const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(thunk, sagaMiddleware)
+    applyMiddleware(thunk, sagaMiddleware),
   );
+
+  const userLang = LANGUAGES.filter(lang => lang.code === navigator.language);
+  let defaultLang = userLang.length > 0 ? userLang[0].code : LANGUAGES[0].code;
 
   // Dispatchs
   store.dispatch(
     initialize(LANGUAGES, {
-      defaultLanguage: 'pt-BR'
-    })
+      defaultLanguage: defaultLang,
+    }),
   );
   store.dispatch(addTranslation(global));
 
@@ -44,14 +47,14 @@ const configureStore = preloadedState => {
     refreshOnCheckAuth: true,
     redirectPath: '/player',
     driver: 'COOKIES',
-    validateSession
+    validateSession,
   };
 
   sessionService.initSessionService(store, options);
 
   // Pusher
   const pusherClient = new Pusher(getEnv('API_PUSHER_KEY'), {
-    cluster: 'us2'
+    cluster: 'us2',
   });
 
   setPusherClient(pusherClient);

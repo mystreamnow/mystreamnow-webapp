@@ -1035,10 +1035,10 @@
     prop-types "^15.7.2"
     react-is "^16.8.6"
 
-"@opentok/client@^2.16.2":
-  version "2.16.2"
-  resolved "https://registry.yarnpkg.com/@opentok/client/-/client-2.16.2.tgz#f6dc4b4a890d0bf5117db3f2c6c84e59c6018a66"
-  integrity sha512-ToyvjXH0mxUdd6Qa/kVqeHCwszqEWSibiSOxYW0ov6x/tQr/UnIVHcYdjgFasY8ywvCsVx6Hlasz2OfYXHtzSw==
+"@opentok/client@^2.16.3":
+  version "2.16.3"
+  resolved "https://registry.yarnpkg.com/@opentok/client/-/client-2.16.3.tgz#3a61c38bfef909a75587963d1117a695069fd045"
+  integrity sha512-+qkE6wZJJ/J1Hv107/tAvmb+DFzQ2eRvoU9VnBU8boEvvLi3Z8WiclCBU+Chfg/W8RicWVpaso4gx9cqqIKH3A==
 
 "@redux-saga/core@^1.0.3":
   version "1.0.3"
