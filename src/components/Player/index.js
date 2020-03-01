@@ -1,49 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { layout } from './../../actions/Player';
-import Request from './../../Library/Request/Request';
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { layout } from "./../../actions/Player";
+import Request from "./../../Library/Request/Request";
 
-import ContainerPlayer from './ContainerPlayer';
+import ContainerPlayer from "./ContainerPlayer";
 
-import './assets/loading.scss';
+import "./assets/loading.scss";
 
-const App = ({ user, layout, onLayout }) => {
+const App = ({ user, layout, onLayout, session }) => {
   const [starPlayer, setStarPlayer] = useState(false);
 
-  useEffect(
-    () => {
-      let getStartPlayer = async () => {
-        if (user) {
-          let { data } = await Request.get('/no-auth/configs/1');
+  useEffect(() => {
+    let getStartPlayer = async () => {
+      if (user) {
+        let { data } = await Request.get(
+          `/no-auth/configs/${session.meeting_id}`
+        );
 
-          if (data) {
-            const { layout_videoconference } = data;
+        if (data) {
+          const { layout_videoconference } = data;
 
-            if (layout.active !== layout_videoconference) {
-              onLayout({
-                class: layout.class,
-                active: layout_videoconference
-              });
-            }
-
-            setStarPlayer(true);
+          if (layout.active !== layout_videoconference) {
+            onLayout({
+              class: layout.class,
+              active: layout_videoconference
+            });
           }
-        }
-      };
 
-      getStartPlayer();
-    },
-    [user]
-  );
+          setStarPlayer(true);
+        }
+      }
+    };
+
+    getStartPlayer();
+  }, [user]);
   if (starPlayer) {
     return (
-      <div id='container_player'>
+      <div id="container_player">
         <ContainerPlayer />
       </div>
     );
   } else {
-    return <p className='loading'>Carregando</p>;
+    return <p className="loading">Carregando</p>;
   }
 };
 
