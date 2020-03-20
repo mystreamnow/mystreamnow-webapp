@@ -34,7 +34,7 @@ const App = ({ user, layout, onLayout, session }) => {
     };
 
     getStartPlayer();
-  }, [user]);
+  });
   if (starPlayer) {
     return (
       <div id="container_player">

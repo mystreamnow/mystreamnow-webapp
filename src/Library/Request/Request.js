@@ -1,24 +1,24 @@
-import axios from 'axios';
-import jwt from 'jwt-simple';
+import axios from "axios";
+import jwt from "jwt-simple";
 
 const { NODE_ENV: run, REACT_APP_JWT_KEY: secret } = process.env;
 
 class Request {
-  constructor () {
+  constructor() {
     this.URL =
-      run === 'development'
-        ? 'http://local.mystreamnow.com/api/'
-        : 'https://adm.mystreamnow.com/api/';
+      run === "development"
+        ? "http://local.mystreamnow.com/api/"
+        : "http://local.mystreamnow.com/api/";
 
     this.Axios = axios.create({
       baseURL: `${this.URL}`,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     });
   }
 
-  async getToken (email) {
+  async getToken(email) {
     const timeRequest = (Date.now() / 1000) | 0;
 
     let JWTToken = jwt.encode(
@@ -31,7 +31,7 @@ class Request {
     );
 
     let token = await this.Axios.post(
-      '/no-auth/accessToken',
+      "/no-auth/accessToken",
       {
         email: email
       },
@@ -43,15 +43,15 @@ class Request {
     return token;
   }
 
-  async get (url) {
+  async get(url) {
     return await this.Axios.get(url);
   }
 
-  async post (url, data) {
+  async post(url, data) {
     return await this.Axios.post(url, data);
   }
 
-  async postPrivate (url, data, token) {
+  async postPrivate(url, data, token) {
     return await this.Axios.post(url, data, {
       headers: { Authorization: `Bearer ${token}` }
     });

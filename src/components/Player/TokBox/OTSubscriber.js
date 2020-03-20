@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import uuid from 'uuid';
-import { connect } from 'react-redux';
-import { Fab, Icon } from '@material-ui/core';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import uuid from "uuid";
+import { connect } from "react-redux";
+import { Fab, Icon } from "@material-ui/core";
 
 class OTSubscriber extends Component {
   constructor(props) {
@@ -13,8 +13,8 @@ class OTSubscriber extends Component {
       hideCamMic: false,
       streamSub: {
         hasAudio: true,
-        hasVideo: true,
-      },
+        hasVideo: true
+      }
     };
   }
 
@@ -23,7 +23,7 @@ class OTSubscriber extends Component {
 
     this.setState({ streamSub: this.props.stream });
 
-    this.props.session.on('streamPropertyChanged', event => {
+    this.props.session.on("streamPropertyChanged", event => {
       if (this.state.streamSub.id === event.stream.id) {
         this.setState({ streamSub: event.stream });
       }
@@ -42,8 +42,8 @@ class OTSubscriber extends Component {
       }
     };
 
-    updateSubscriberProperty('subscribeToAudio');
-    updateSubscriberProperty('subscribeToVideo');
+    updateSubscriberProperty("subscribeToAudio");
+    updateSubscriberProperty("subscribeToVideo");
 
     if (
       this.props.session !== prevProps.session ||
@@ -68,21 +68,21 @@ class OTSubscriber extends Component {
       return;
     }
 
-    const divSubscriber = document.createElement('div');
+    const divSubscriber = document.createElement("div");
 
-    if (this.props.stream.videoType == 'camera') {
+    if (this.props.stream.videoType === "camera") {
       divSubscriber.setAttribute(
-        'class',
-        `OTSubscriberContainer sub_${this.props.stream.id}`,
+        "class",
+        `OTSubscriberContainer sub_${this.props.stream.id}`
       );
       this.node.appendChild(divSubscriber);
     }
 
-    if (this.props.stream.videoType == 'screen') {
-      const ColParticipants = document.getElementById('col-presentation');
+    if (this.props.stream.videoType === "screen") {
+      const ColParticipants = document.getElementById("col-presentation");
 
-      divSubscriber.setAttribute('id', 'OTScreenShare');
-      divSubscriber.setAttribute('class', 'presentation screen-share-bg');
+      divSubscriber.setAttribute("id", "OTScreenShare");
+      divSubscriber.setAttribute("class", "presentation screen-share-bg");
 
       ColParticipants.appendChild(divSubscriber);
     }
@@ -100,17 +100,17 @@ class OTSubscriber extends Component {
           // component unmounted so don't invoke any callbacks
           return;
         }
-        if (err && typeof this.props.onError === 'function') {
+        if (err && typeof this.props.onError === "function") {
           this.props.onError(err);
-        } else if (!err && typeof this.props.onSubscribe === 'function') {
+        } else if (!err && typeof this.props.onSubscribe === "function") {
           this.props.onSubscribe();
         }
-      },
+      }
     );
 
     if (
       this.props.eventHandlers &&
-      typeof this.props.eventHandlers === 'object'
+      typeof this.props.eventHandlers === "object"
     ) {
       subscriber.on(this.props.eventHandlers);
     }
@@ -124,9 +124,9 @@ class OTSubscriber extends Component {
     if (this.state.subscriber) {
       if (
         this.props.eventHandlers &&
-        typeof this.props.eventHandlers === 'object'
+        typeof this.props.eventHandlers === "object"
       ) {
-        this.state.subscriber.once('destroyed', () => {
+        this.state.subscriber.once("destroyed", () => {
           this.state.subscriber.off(this.props.eventHandlers);
         });
       }
@@ -145,52 +145,61 @@ class OTSubscriber extends Component {
     const { stream } = this.props;
 
     return (
-      stream.videoType != 'screen' &&
-      <div id="subscriber" ref={node => (this.node = node)} className={'video'}>
-        <div className="box-buttons">
-          <Fab
-            className={`transparent btn-video ${this.state.streamSub.hasVideo
-              ? ''
-              : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
-          >
-            {this.state.streamSub.hasVideo
-              ? <Icon>videocam</Icon>
-              : <Icon>videocam_off</Icon>}
-          </Fab>
+      stream.videoType !== "screen" && (
+        <div
+          id="subscriber"
+          ref={node => (this.node = node)}
+          className={"video"}
+        >
+          <div className="box-buttons">
+            <Fab
+              className={`transparent btn-video ${
+                this.state.streamSub.hasVideo ? "" : "inactive"
+              } ${this.state.hideCamMic ? "no-show" : ""}`}
+            >
+              {this.state.streamSub.hasVideo ? (
+                <Icon>videocam</Icon>
+              ) : (
+                <Icon>videocam_off</Icon>
+              )}
+            </Fab>
 
-          <Fab
-            className={`transparent btn-audio ${this.state.streamSub.hasAudio
-              ? ''
-              : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
-          >
-            {this.state.streamSub.hasAudio
-              ? <Icon>mic</Icon>
-              : <Icon>mic_off</Icon>}
-          </Fab>
+            <Fab
+              className={`transparent btn-audio ${
+                this.state.streamSub.hasAudio ? "" : "inactive"
+              } ${this.state.hideCamMic ? "no-show" : ""}`}
+            >
+              {this.state.streamSub.hasAudio ? (
+                <Icon>mic</Icon>
+              ) : (
+                <Icon>mic_off</Icon>
+              )}
+            </Fab>
 
-          {/* <Pusher
+            {/* <Pusher
               channel={`player_${user.session.code}`}
               event={`hide_cam_mic_${user.session.code}`}
               onUpdate={response => this.setHideCamMic(response.data)}
             /> */}
+          </div>
         </div>
-      </div>
+      )
     );
   }
 }
 
 OTSubscriber.propTypes = {
   stream: PropTypes.shape({
-    streamId: PropTypes.string,
+    streamId: PropTypes.string
   }),
   session: PropTypes.shape({
     subscribe: PropTypes.func,
-    unsubscribe: PropTypes.func,
+    unsubscribe: PropTypes.func
   }),
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onSubscribe: PropTypes.func,
-  onError: PropTypes.func,
+  onError: PropTypes.func
 };
 
 OTSubscriber.defaultProps = {
@@ -199,11 +208,11 @@ OTSubscriber.defaultProps = {
   properties: {},
   eventHandlers: null,
   onSubscribe: null,
-  onError: null,
+  onError: null
 };
 
 const mapStateToProps = state => ({
-  user: state.session.user,
+  user: state.session.user
 });
 
 export default connect(mapStateToProps)(OTSubscriber);

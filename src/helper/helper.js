@@ -2,13 +2,14 @@ export const hydrateObject = object => {
   let rows;
   object.map(data => {
     rows = { data };
+    return rows;
   });
 
   return rows.data;
 };
 
 export const getEnv = name => {
-  let env = '';
+  let env = "";
 
   switch (name) {
     default:
@@ -19,7 +20,7 @@ export const getEnv = name => {
 };
 
 export const getApiUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     return process.env.REACT_APP_URL_API_PROD;
   }
 
@@ -39,25 +40,25 @@ export const jsonValid = str => {
 export const detectBrowser = () => {
   let name = false;
   if (/* @cc_on!@ */ false || !!document.documentMode) {
-    name = 'Internet Explorer';
-  } else if (navigator.userAgent.indexOf('Firefox') != -1) {
-    name = 'Firefox';
+    name = "Internet Explorer";
+  } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
+    name = "Firefox";
   } else if (
-    !!window['opr'] ||
-    !!window['opera'] ||
-    navigator.userAgent.indexOf(' OPR/') >= 0
+    !!window["opr"] ||
+    !!window["opera"] ||
+    navigator.userAgent.indexOf(" OPR/") >= 0
   ) {
-    name = 'Opera';
+    name = "Opera";
   } else if (
-    !!window['chrome'] ||
-    navigator.userAgent.indexOf('Chrome') != -1
+    !!window["chrome"] ||
+    navigator.userAgent.indexOf("Chrome") !== -1
   ) {
-    name = 'Chrome';
+    name = "Chrome";
   } else if (
-    !!window['safari'] ||
-    navigator.userAgent.indexOf('Safari') != -1
+    !!window["safari"] ||
+    navigator.userAgent.indexOf("Safari") !== -1
   ) {
-    name = 'Safari';
+    name = "Safari";
   }
   return name;
 };

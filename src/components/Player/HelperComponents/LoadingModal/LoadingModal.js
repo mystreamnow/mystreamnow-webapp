@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import {
   Dialog,
   DialogTitle,
@@ -7,51 +7,47 @@ import {
   DialogContentText,
   DialogActions,
   Button
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import audioLoading from './../../assets/login.mp3';
+import audioLoading from "./../../assets/login.mp3";
 
 const LoadingModal = ({ connecteduser, name }) => {
   const [open, setOpen] = React.useState(false);
 
-  useEffect(
-    () => {
-      setOpen(connecteduser);
+  useEffect(() => {
+    setOpen(connecteduser);
 
-      if (connecteduser) {
-        setTimeout(() => {
-          setOpen(false);
-        }, 4000);
-      }
-    },
-    [connecteduser]
-  );
+    if (connecteduser) {
+      setTimeout(() => {
+        setOpen(false);
+      }, 4000);
+    }
+  }, [connecteduser]);
 
-  function handleClose () {
+  function handleClose() {
     setOpen(false);
   }
 
   return (
     <Dialog
       open={open}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id='alert-dialog-title'>
-        {'Conectado na sala!'}
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-title">{"Conectado na sala!"}</DialogTitle>
       <DialogContent>
-        <DialogContentText id='alert-dialog-description'>
+        <DialogContentText id="alert-dialog-description">
           Olá, <strong>{name}</strong> nós já conectamos você na sala, por
           favor, inicie sua reunião ou transmissão.
           <iframe
+            title="Sala"
             src={audioLoading}
-            allow='autoplay'
-            style={{ display: 'none' }}
+            allow="autoplay"
+            style={{ display: "none" }}
           />
         </DialogContentText>
         <DialogActions>
-          <Button variant='contained' onClick={handleClose} color='primary'>
+          <Button variant="contained" onClick={handleClose} color="primary">
             Entendi
           </Button>
         </DialogActions>

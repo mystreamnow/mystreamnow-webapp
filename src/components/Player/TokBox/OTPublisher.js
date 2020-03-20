@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import once from 'lodash/once';
-import uuid from 'uuid';
-import { initPublisher } from '@opentok/client';
-import { connect } from 'react-redux';
-import { Fab, Icon, Tooltip } from '@material-ui/core';
-import { allowCam, allowMic } from './../../../actions/Player';
+/* eslint react-hooks/rules-of-hooks: 0 */
+
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import once from "lodash/once";
+import uuid from "uuid";
+import { initPublisher } from "@opentok/client";
+import { connect } from "react-redux";
+import { Fab, Icon, Tooltip } from "@material-ui/core";
+import { allowCam, allowMic } from "./../../../actions/Player";
 
 class OTPublisher extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class OTPublisher extends Component {
       pubError: null,
       publisher: null,
       hideCamMic: false,
-      lastStreamId: '',
+      lastStreamId: ""
     };
   }
 
@@ -40,26 +42,26 @@ class OTPublisher extends Component {
       }
     };
 
-    if (shouldUpdate('audioSource', undefined)) {
+    if (shouldUpdate("audioSource", undefined)) {
       this.destroyPublisher();
       this.createPublisher();
       return;
     }
 
-    if (shouldUpdate('videoSource', undefined)) {
+    if (shouldUpdate("videoSource", undefined)) {
       this.destroyPublisher();
       this.createPublisher();
       return;
     }
 
-    if (shouldUpdate('fitMode', undefined)) {
+    if (shouldUpdate("fitMode", undefined)) {
       this.destroyPublisher();
       this.createPublisher();
       return;
     }
 
-    updatePublisherProperty('publishAudio', true);
-    updatePublisherProperty('publishVideo', true);
+    updatePublisherProperty("publishAudio", true);
+    updatePublisherProperty("publishVideo", true);
 
     if (this.props.session !== prevProps.session) {
       this.destroyPublisher(prevProps.session);
@@ -69,7 +71,7 @@ class OTPublisher extends Component {
 
   componentWillUnmount() {
     if (this.props.session) {
-      this.props.session.off('sessionConnected', this.sessionConnectedHandler);
+      this.props.session.off("sessionConnected", this.sessionConnectedHandler);
     }
 
     this.destroyPublisher();
@@ -83,13 +85,13 @@ class OTPublisher extends Component {
     delete this.publisherId;
 
     if (this.state.publisher) {
-      this.state.publisher.off('streamCreated', this.streamCreatedHandler);
+      this.state.publisher.off("streamCreated", this.streamCreatedHandler);
 
       if (
         this.props.eventHandlers &&
-        typeof this.props.eventHandlers === 'object'
+        typeof this.props.eventHandlers === "object"
       ) {
-        this.state.publisher.once('destroyed', () => {
+        this.state.publisher.once("destroyed", () => {
           this.state.publisher.off(this.props.eventHandlers);
         });
       }
@@ -112,7 +114,7 @@ class OTPublisher extends Component {
       }
       if (err) {
         this.errorHandler(err);
-      } else if (typeof this.props.onPublish === 'function') {
+      } else if (typeof this.props.onPublish === "function") {
         this.props.onPublish();
       }
     });
@@ -120,7 +122,7 @@ class OTPublisher extends Component {
 
   createPublisher() {
     if (!this.props.session) {
-      this.setState({ publisher: null, lastStreamId: '' });
+      this.setState({ publisher: null, lastStreamId: "" });
       return;
     }
 
@@ -128,8 +130,8 @@ class OTPublisher extends Component {
     let container;
 
     if (properties.insertDefaultUI !== false) {
-      container = document.createElement('div');
-      container.setAttribute('class', `OTPublisherContainer pub_1`);
+      container = document.createElement("div");
+      container.setAttribute("class", `OTPublisherContainer pub_1`);
       this.node.appendChild(container);
     }
 
@@ -142,10 +144,10 @@ class OTPublisher extends Component {
         // component unmounted so don't invoke any callbacks
         return;
       }
-      if (typeof this.props.onError === 'function') {
+      if (typeof this.props.onError === "function") {
         this.props.onError(err);
 
-        if (err.code === 1500 && err.name === 'OT_NO_DEVICES_FOUND') {
+        if (err.code === 1500 && err.name === "OT_NO_DEVICES_FOUND") {
           this.setState({ pubError: err });
         }
       }
@@ -159,16 +161,16 @@ class OTPublisher extends Component {
       }
       if (err) {
         this.errorHandler(err);
-      } else if (typeof this.props.onInit === 'function') {
+      } else if (typeof this.props.onInit === "function") {
         this.props.onInit();
       }
     });
 
-    publisher.on('streamCreated', this.streamCreatedHandler);
+    publisher.on("streamCreated", this.streamCreatedHandler);
 
     if (
       this.props.eventHandlers &&
-      typeof this.props.eventHandlers === 'object'
+      typeof this.props.eventHandlers === "object"
     ) {
       publisher.on(this.props.eventHandlers);
     }
@@ -176,10 +178,10 @@ class OTPublisher extends Component {
     if (this.props.session.connection) {
       this.publishToSession(publisher);
     } else {
-      this.props.session.once('sessionConnected', this.sessionConnectedHandler);
+      this.props.session.once("sessionConnected", this.sessionConnectedHandler);
     }
 
-    this.setState({ publisher, lastStreamId: '' });
+    this.setState({ publisher, lastStreamId: "" });
   }
 
   sessionConnectedHandler = () => {
@@ -202,49 +204,55 @@ class OTPublisher extends Component {
     const { allowCam, allowMic } = this.props;
 
     return (
-      <div id="publisher" className={'video'} ref={node => (this.node = node)}>
-        {this.state.pubError === null
-          ? <div className="box-buttons">
-              <Tooltip
-                title={allowCam ? 'Desabilitar' : 'Habilitar'}
-                placement="right"
+      <div id="publisher" className={"video"} ref={node => (this.node = node)}>
+        {this.state.pubError === null ? (
+          <div className="box-buttons">
+            <Tooltip
+              title={allowCam ? "Desabilitar" : "Habilitar"}
+              placement="right"
+            >
+              <Fab
+                className={`transparent btn-video ${
+                  allowCam ? "" : "inactive"
+                } ${this.state.hideCamMic ? "no-show" : ""}`}
+                onClick={() => this.setAllowCam(allowCam)}
               >
-                <Fab
-                  className={`transparent btn-video ${allowCam
-                    ? ''
-                    : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
-                  onClick={() => this.setAllowCam(allowCam)}
-                >
-                  {allowCam ? <Icon>videocam</Icon> : <Icon>videocam_off</Icon>}
-                </Fab>
-              </Tooltip>
+                {allowCam ? <Icon>videocam</Icon> : <Icon>videocam_off</Icon>}
+              </Fab>
+            </Tooltip>
 
-              <Tooltip
-                title={allowMic ? 'Desabilitar' : 'Habilitar'}
-                placement="right"
+            <Tooltip
+              title={allowMic ? "Desabilitar" : "Habilitar"}
+              placement="right"
+            >
+              <Fab
+                className={`transparent btn-audio ${
+                  allowMic ? "" : "inactive"
+                } ${this.state.hideCamMic ? "no-show" : ""}`}
+                onClick={() => this.setAllowMic(allowMic)}
               >
-                <Fab
-                  className={`transparent btn-audio ${allowMic
-                    ? ''
-                    : 'inactive'} ${this.state.hideCamMic ? 'no-show' : ''}`}
-                  onClick={() => this.setAllowMic(allowMic)}
+                {allowMic ? <Icon>mic</Icon> : <Icon>mic_off</Icon>}
+              </Fab>
+            </Tooltip>
+          </div>
+        ) : (
+          <div className="no-device-found">
+            <h4>Não conseguimos detectar sua câmera ou microfone!</h4>
+            <p>
+              Por favor verifique a instalação da sua câmera ou microfone
+              e&nbsp;
+              <strong>
+                <a
+                  href="/"
+                  className="pointer"
+                  onClick={() => console.log("refresh")}
                 >
-                  {allowMic ? <Icon>mic</Icon> : <Icon>mic_off</Icon>}
-                </Fab>
-              </Tooltip>
-            </div>
-          : <div className="no-device-found">
-              <h4>Não conseguimos detectar sua câmera ou microfone!</h4>
-              <p>
-                Por favor verifique a instalação da sua câmera ou microfone
-                e&nbsp;
-                <strong>
-                  <a className="pointer" onClick={() => location.reload()}>
-                    RECARREGUE A PÁGINA!
-                  </a>
-                </strong>
-              </p>
-            </div>}
+                  RECARREGUE A PÁGINA!
+                </a>
+              </strong>
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -253,18 +261,18 @@ class OTPublisher extends Component {
 OTPublisher.propTypes = {
   session: PropTypes.shape({
     connection: PropTypes.shape({
-      connectionId: PropTypes.string,
+      connectionId: PropTypes.string
     }),
     once: PropTypes.func,
     off: PropTypes.func,
     publish: PropTypes.func,
-    unpublish: PropTypes.func,
+    unpublish: PropTypes.func
   }),
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onInit: PropTypes.func,
   onPublish: PropTypes.func,
-  onError: PropTypes.func,
+  onError: PropTypes.func
 };
 
 OTPublisher.defaultProps = {
@@ -273,7 +281,7 @@ OTPublisher.defaultProps = {
   eventHandlers: null,
   onInit: null,
   onPublish: null,
-  onError: null,
+  onError: null
 };
 
 const mapStateToProps = state => ({
@@ -281,7 +289,7 @@ const mapStateToProps = state => ({
   allowCam: state.AllowCam,
   microphone: state.Microphone,
   user: state.session.user,
-  allowMic: state.AllowMic,
+  allowMic: state.AllowMic
 });
 
 const mapDispatchToProps = dispatch => {
@@ -291,7 +299,7 @@ const mapDispatchToProps = dispatch => {
     },
     onAllowMic: boolean => {
       dispatch(allowMic(boolean));
-    },
+    }
   };
 };
 

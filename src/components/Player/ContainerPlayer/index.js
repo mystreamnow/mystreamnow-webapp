@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import Fullscreen from 'react-full-screen';
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import Fullscreen from "react-full-screen";
 
-import BodyPlayer from '../BodyPlayer';
-import BarControllers from '../BarControllers';
-import Presentation from './../Presentation/Presentation';
-import { aspectRatio } from './../../../actions/Player';
+import BodyPlayer from "../BodyPlayer";
+import BarControllers from "../BarControllers";
+import Presentation from "./../Presentation/Presentation";
+import { aspectRatio } from "./../../../actions/Player";
 
 const ContainerPlayer = ({ layout, aspectratio, onAspectRatio }) => {
   return (
@@ -14,10 +14,10 @@ const ContainerPlayer = ({ layout, aspectratio, onAspectRatio }) => {
         enabled={aspectratio}
         onChange={isFull => onAspectRatio(isFull)}
       >
-        <div id='body_player'>
+        <div id="body_player">
           <BodyPlayer />
 
-          <Presentation noStart={layout.active != layout.class[1]} />
+          <Presentation noStart={layout.active !== layout.class[1]} />
         </div>
         <BarControllers />
       </Fullscreen>

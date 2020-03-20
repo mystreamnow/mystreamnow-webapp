@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import Hls from 'hls.js';
+import React, { Component } from "react";
+import Hls from "hls.js";
 
-import './assets/scss/video.scss';
+import "./assets/scss/video.scss";
 
 class Player extends Component {
-  constructor (props) {
-    super(props);
-  }
-
-  componentDidMount () {
+  componentDidMount() {
     if (this.player) {
       const video = this.player;
       const { hls: VideoSource } = this.props;
@@ -24,16 +20,16 @@ class Player extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
-      <div id='video_pre_view'>
+      <div id="video_pre_view">
         <video
           controls
-          crossOrigin='true'
+          crossOrigin="true"
           ref={player => (this.player = player)}
           autoPlay
           muted
-          className='player_video'
+          className="player_video"
         />
       </div>
     );

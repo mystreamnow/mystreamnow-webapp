@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body {
   font-family: Roboto;
+  margin: 0;
+  overflow: hidden;
   &.player {
     margin: 0;
     background-color: black;
@@ -104,7 +106,7 @@ body {
 
       .video {
         flex-grow: 1;
-        padding: .4rem;
+        padding: 0.4rem;
         border-radius: 2rem;
         margin-bottom: 0;
 
