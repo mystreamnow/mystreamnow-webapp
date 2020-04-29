@@ -31,6 +31,7 @@ class Publisher extends Component {
       <React.Fragment>
         <OTPublisher
           initialChecked={this.state.videoSource}
+          className="video"
           properties={{
             fitMode: this.state.fitMode,
             name: name,

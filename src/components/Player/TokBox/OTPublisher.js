@@ -204,12 +204,13 @@ class OTPublisher extends Component {
   };
 
   render() {
-    const { allowCam, allowMic } = this.props;
+    const { allowCam, allowMic, className, style } = this.props;
 
     return (
       <div
         id="publisher"
-        className={"video"}
+        className={className}
+        style={style}
         ref={(node) => {
           this.node = node;
         }}
@@ -277,6 +278,8 @@ OTPublisher.propTypes = {
     publish: PropTypes.func,
     unpublish: PropTypes.func,
   }),
+  className: PropTypes.string,
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onInit: PropTypes.func,
@@ -298,6 +301,8 @@ OTPublisher.contextTypes = {
 
 OTPublisher.defaultProps = {
   session: null,
+  className: "",
+  style: {},
   properties: {},
   eventHandlers: null,
   onInit: null,

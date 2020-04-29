@@ -32,7 +32,11 @@ export default class Subscriber extends Component {
             archiveStatusDisplayMode: "off",
           },
         }}
+        className="video"
         onError={this.onError}
+        retry={true}
+        maxRetryAttempts={3}
+        retryAttemptTimeout={2000}
       />
     );
   }

@@ -12,6 +12,7 @@ class OTSubscriber extends Component {
       subscriber: null,
       stream: props.stream || context.stream || null,
       session: props.session || context.session || null,
+      currentRetryAttempt: 0,
       hideCamMic: false,
       streamSub: {
         hasAudio: true,
@@ -102,6 +103,16 @@ class OTSubscriber extends Component {
           // component unmounted so don't invoke any callbacks
           return;
         }
+        if (
+          err &&
+          this.props.retry &&
+          this.state.currentRetryAttempt < this.maxRetryAttempts - 1
+        ) {
+          // Error during subscribe function
+          this.handleRetrySubscriber();
+          // If there is a retry action, do we want to execute the onError props function?
+          // return;
+        }
         if (err && typeof this.props.onError === "function") {
           this.props.onError(err);
         } else if (!err && typeof this.props.onSubscribe === "function") {
@@ -118,6 +129,16 @@ class OTSubscriber extends Component {
     }
 
     this.setState({ subscriber });
+  }
+
+  handleRetrySubscriber() {
+    setTimeout(() => {
+      this.setState((state) => ({
+        currentRetryAttempt: state.currentRetryAttempt + 1,
+        subscriber: null,
+      }));
+      this.createSubscriber();
+    }, this.retryAttemptTimeout);
   }
 
   destroySubscriber(session = this.props.session) {
@@ -145,6 +166,7 @@ class OTSubscriber extends Component {
 
   render() {
     const { stream } = this.state;
+    const { className, style } = this.props;
 
     return (
       stream.videoType !== "screen" && (
@@ -153,7 +175,8 @@ class OTSubscriber extends Component {
           ref={(node) => {
             this.node = node;
           }}
-          className={"video"}
+          className={className}
+          style={style}
         >
           <div className="box-buttons">
             <Fab
@@ -200,7 +223,12 @@ OTSubscriber.propTypes = {
     subscribe: PropTypes.func,
     unsubscribe: PropTypes.func,
   }),
+  className: PropTypes.string,
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  retry: PropTypes.bool,
+  maxRetryAttempts: PropTypes.number,
+  retryAttemptTimeout: PropTypes.number,
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onSubscribe: PropTypes.func,
   onError: PropTypes.func,
@@ -220,6 +248,11 @@ OTSubscriber.defaultProps = {
   stream: null,
   session: null,
   properties: {},
+  retry: false,
+  maxRetryAttempts: 5,
+  retryAttemptTimeout: 1000,
+  className: "",
+  style: {},
   eventHandlers: null,
   onSubscribe: null,
   onError: null,

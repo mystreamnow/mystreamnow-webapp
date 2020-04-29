@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Publisher from './Publisher';
-import Subscriber from './Subscriber';
-import { OTSession, OTStreams } from './TokBox';
-import { getEnv } from './../../helper/helper';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import Publisher from "./Publisher";
+import Subscriber from "./Subscriber";
+import { OTSession, OTStreams } from "./TokBox";
+import { getEnv } from "./../../helper/helper";
+import { connect } from "react-redux";
 
-import { connectedSession } from './../../actions/Player';
+import { connectedSession } from "./../../actions/Player";
 
 class Player extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Player extends Component {
     };
   }
 
-  onError = err => {
+  onError = (err) => {
     this.setState({ error: `Failed to connect: ${err.message}` });
   };
 
@@ -34,16 +34,16 @@ class Player extends Component {
     const { session, token } = this.props;
     return (
       <OTSession
-        apiKey={getEnv('API_TOKBOX_KEY')}
+        apiKey={getEnv("API_TOKBOX_KEY")}
         sessionId={session}
         token={token}
         eventHandlers={this.sessionEvents}
+        // options={{
+        //   connectionEventsSuppressed: true,
+        // }}
+        //https://tokbox.com/developer/guides/broadcast/live-interactive-video/#suppressing-connection-events
       >
-        {this.state.error
-          ? <div>
-              {this.state.error}
-            </div>
-          : null}
+        {this.state.error ? <div>{this.state.error}</div> : null}
         <Publisher />
 
         <OTStreams
@@ -62,9 +62,9 @@ const mapState = () => {
   return {};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onUserConnected: bool => {
+    onUserConnected: (bool) => {
       dispatch(connectedSession(bool));
     },
   };

@@ -48,6 +48,7 @@ class OTSession extends Component {
       },
       onConnect: this.props.onConnect,
       onError: this.props.onError,
+      options: this.props.options,
     });
 
     if (
@@ -90,12 +91,14 @@ OTSession.propTypes = {
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onConnect: PropTypes.func,
   onError: PropTypes.func,
+  options: PropTypes.object,
 };
 
 OTSession.defaultProps = {
   eventHandlers: null,
   onConnect: null,
   onError: null,
+  options: {},
 };
 
 OTSession.childContextTypes = {
