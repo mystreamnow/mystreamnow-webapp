@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import once from "lodash/once";
+import { omitBy, isNil } from "lodash/fp";
 import uuid from "uuid";
 import { initPublisher } from "@opentok/client";
 import { connect } from "react-redux";
@@ -10,14 +11,15 @@ import { Fab, Icon, Tooltip } from "@material-ui/core";
 import { allowCam, allowMic } from "./../../../actions/Player";
 
 class OTPublisher extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
     this.state = {
       pubError: null,
       publisher: null,
       hideCamMic: false,
-      lastStreamId: ""
+      lastStreamId: "",
+      session: props.session || context.session || null,
     };
   }
 
@@ -25,7 +27,7 @@ class OTPublisher extends Component {
     this.createPublisher();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const useDefault = (value, defaultValue) =>
       value === undefined ? defaultValue : value;
 
@@ -63,15 +65,15 @@ class OTPublisher extends Component {
     updatePublisherProperty("publishAudio", true);
     updatePublisherProperty("publishVideo", true);
 
-    if (this.props.session !== prevProps.session) {
-      this.destroyPublisher(prevProps.session);
+    if (this.state.session !== prevState.session) {
+      this.destroyPublisher(prevState.session);
       this.createPublisher();
     }
   }
 
   componentWillUnmount() {
-    if (this.props.session) {
-      this.props.session.off("sessionConnected", this.sessionConnectedHandler);
+    if (this.state.session) {
+      this.state.session.off("sessionConnected", this.sessionConnectedHandler);
     }
 
     this.destroyPublisher();
@@ -81,7 +83,7 @@ class OTPublisher extends Component {
     return this.state.publisher;
   }
 
-  destroyPublisher(session = this.props.session) {
+  destroyPublisher(session = this.state.session) {
     delete this.publisherId;
 
     if (this.state.publisher) {
@@ -106,7 +108,7 @@ class OTPublisher extends Component {
   publishToSession(publisher) {
     const { publisherId } = this;
 
-    this.props.session.publish(publisher, err => {
+    this.state.session.publish(publisher, (err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -121,7 +123,7 @@ class OTPublisher extends Component {
   }
 
   createPublisher() {
-    if (!this.props.session) {
+    if (!this.state.session) {
       this.setState({ publisher: null, lastStreamId: "" });
       return;
     }
@@ -131,14 +133,17 @@ class OTPublisher extends Component {
 
     if (properties.insertDefaultUI !== false) {
       container = document.createElement("div");
-      container.setAttribute("class", `OTPublisherContainer pub_1`);
+      container.setAttribute(
+        "class",
+        `OTPublisherContainer pub_${this.props.user.me.id}`
+      );
       this.node.appendChild(container);
     }
 
     this.publisherId = uuid();
     const { publisherId } = this;
 
-    this.errorHandler = once(err => {
+    this.errorHandler = once((err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -146,14 +151,10 @@ class OTPublisher extends Component {
       }
       if (typeof this.props.onError === "function") {
         this.props.onError(err);
-
-        if (err.code === 1500 && err.name === "OT_NO_DEVICES_FOUND") {
-          this.setState({ pubError: err });
-        }
       }
     });
 
-    const publisher = initPublisher(container, properties, err => {
+    const publisher = initPublisher(container, properties, (err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -172,13 +173,14 @@ class OTPublisher extends Component {
       this.props.eventHandlers &&
       typeof this.props.eventHandlers === "object"
     ) {
-      publisher.on(this.props.eventHandlers);
+      const handles = omitBy(isNil)(this.props.eventHandlers);
+      publisher.on(handles);
     }
 
-    if (this.props.session.connection) {
+    if (this.state.session.connection) {
       this.publishToSession(publisher);
     } else {
-      this.props.session.once("sessionConnected", this.sessionConnectedHandler);
+      this.state.session.once("sessionConnected", this.sessionConnectedHandler);
     }
 
     this.setState({ publisher, lastStreamId: "" });
@@ -188,15 +190,15 @@ class OTPublisher extends Component {
     this.publishToSession(this.state.publisher);
   };
 
-  streamCreatedHandler = event => {
+  streamCreatedHandler = (event) => {
     this.setState({ lastStreamId: event.stream.id });
   };
 
-  setAllowCam = data => {
+  setAllowCam = (data) => {
     this.props.onAllowCam(!data);
   };
 
-  setAllowMic = data => {
+  setAllowMic = (data) => {
     this.props.onAllowMic(!data);
   };
 
@@ -204,7 +206,11 @@ class OTPublisher extends Component {
     const { allowCam, allowMic } = this.props;
 
     return (
-      <div id="publisher" className={"video"} ref={node => (this.node = node)}>
+      <div
+        id="publisher"
+        className={"video"}
+        ref={(node) => (this.node = node)}
+      >
         {this.state.pubError === null ? (
           <div className="box-buttons">
             <Tooltip
@@ -261,45 +267,61 @@ class OTPublisher extends Component {
 OTPublisher.propTypes = {
   session: PropTypes.shape({
     connection: PropTypes.shape({
-      connectionId: PropTypes.string
+      connectionId: PropTypes.string,
     }),
     once: PropTypes.func,
     off: PropTypes.func,
     publish: PropTypes.func,
-    unpublish: PropTypes.func
+    unpublish: PropTypes.func,
   }),
+  className: PropTypes.string,
+  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onInit: PropTypes.func,
   onPublish: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
 };
 
 OTPublisher.defaultProps = {
   session: null,
+  className: "",
+  style: {},
   properties: {},
   eventHandlers: null,
   onInit: null,
   onPublish: null,
-  onError: null
+  onError: null,
 };
 
-const mapStateToProps = state => ({
+OTPublisher.contextTypes = {
+  session: PropTypes.shape({
+    connection: PropTypes.shape({
+      connectionId: PropTypes.string,
+    }),
+    once: PropTypes.func,
+    off: PropTypes.func,
+    publish: PropTypes.func,
+    unpublish: PropTypes.func,
+  }),
+};
+
+const mapStateToProps = (state) => ({
   camera: state.Camera,
   allowCam: state.AllowCam,
   microphone: state.Microphone,
   user: state.session.user,
-  allowMic: state.AllowMic
+  allowMic: state.AllowMic,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAllowCam: boolean => {
+    onAllowCam: (boolean) => {
       dispatch(allowCam(boolean));
     },
-    onAllowMic: boolean => {
+    onAllowMic: (boolean) => {
       dispatch(allowMic(boolean));
-    }
+    },
   };
 };
 

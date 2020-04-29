@@ -31,7 +31,7 @@ class BarControllers extends Component {
 
     this.state = {
       supported: false,
-      loadingSreenShare: true
+      loadingSreenShare: true,
     };
   }
 
@@ -46,13 +46,13 @@ class BarControllers extends Component {
   handleStopScreenShare = () => {
     this.screenSharePublisher.destroy();
     this.setState({
-      loadingSreenShare: true
+      loadingSreenShare: true,
     });
     this.pusherTrigger(
       "layout",
       {
         layout: this.props.layout.class[0],
-        me: this.props.email
+        me: this.props.email,
       },
       false
     );
@@ -76,14 +76,14 @@ class BarControllers extends Component {
 
     if (!screenshare) {
       this.addNodeScreenShare();
-      OT.checkScreenSharingCapability(response => {
+      OT.checkScreenSharingCapability((response) => {
         if (!response.supported || response.extensionRegistered === false) {
           this.setState({
-            supported: true
+            supported: true,
           });
         } else if (response.extensionInstalled === false) {
           this.setState({
-            supported: true
+            supported: true,
           });
         } else {
           this.screenSharePublisher = OT.initPublisher(
@@ -95,16 +95,16 @@ class BarControllers extends Component {
                 nameDisplayMode: "off",
                 buttonDisplayMode: "off",
                 audioLevelDisplayMode: "off",
-                archiveStatusDisplayMode: "off"
-              }
+                archiveStatusDisplayMode: "off",
+              },
             },
-            error => {
+            (error) => {
               if (error) {
                 this.handleStopScreenShare();
               } else {
                 this.props.opentokSession.publish(
                   this.screenSharePublisher,
-                  err => {
+                  (err) => {
                     if (err) {
                       console.log(err);
                     }
@@ -115,7 +115,7 @@ class BarControllers extends Component {
           );
           this.props.onScreenShare(true);
           this.setState({
-            loadingSreenShare: false
+            loadingSreenShare: false,
           });
           this.Listener(this.screenSharePublisher);
         }
@@ -144,7 +144,7 @@ class BarControllers extends Component {
       type: "screenshare",
       meeting_id,
       broadcastingon,
-      layoutPresentation
+      layoutPresentation,
     });
   };
 
@@ -184,17 +184,17 @@ class BarControllers extends Component {
       },
       streamCreated: () => {
         this.setState({
-          loadingSreenShare: true
+          loadingSreenShare: true,
         });
         this.pusherTrigger(
           "layout",
           {
             layout: this.props.layout.class[1],
-            me: this.props.email
+            me: this.props.email,
           },
           true
         );
-      }
+      },
     });
   }
 
@@ -202,7 +202,7 @@ class BarControllers extends Component {
     if (this.props.layout.active !== layout) {
       this.props.onLayout({
         class: this.props.layout.class,
-        active: layout
+        active: layout,
       });
     }
   };
@@ -282,14 +282,14 @@ class BarControllers extends Component {
         <Pusher
           channel={`player_${session.meeting_identified_room}`}
           event={`layout_${session.meeting_identified_room}`}
-          onUpdate={response => this.setLayout(response)}
+          onUpdate={(response) => this.setLayout(response)}
         />
       </div>
     );
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     session: state.session.user.session,
     layout: state.Layout,
@@ -298,21 +298,21 @@ const mapState = state => {
     aspectratio: state.aspectratio,
     email: state.session.user.me.email,
     broadcastingon: state.broadcastingon,
-    layoutbroadcast: state.layoutbroadcast
+    layoutbroadcast: state.layoutbroadcast,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onLayout: number => {
+    onLayout: (number) => {
       dispatch(layout(number));
     },
-    onScreenShare: boolean => {
+    onScreenShare: (boolean) => {
       dispatch(screenShare(boolean));
     },
-    onAspectRatio: boolean => {
+    onAspectRatio: (boolean) => {
       dispatch(aspectRatio(boolean));
-    }
+    },
   };
 };
 

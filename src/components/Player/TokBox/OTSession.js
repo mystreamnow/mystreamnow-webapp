@@ -1,24 +1,29 @@
-import { Component, Children, cloneElement } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { streams, opentokSession } from './../../../actions/Player';
+/* eslint-disable react/no-deprecated */
+import { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { streams, opentokSession } from "./../../../actions/Player";
 
-import createSession from './createSession';
+import createSession from "./createSession";
 
 class OTSession extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
-      streams: []
+      streams: [],
     };
   }
 
-  UNSAFE_componentWillMount () {
+  getChildContext() {
+    return { session: this.sessionHelper.session, streams: this.state.streams };
+  }
+
+  componentWillMount() {
     this.createSession();
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       prevProps.apiKey !== this.props.apiKey ||
       prevProps.sessionId !== this.props.sessionId ||
@@ -28,27 +33,28 @@ class OTSession extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.destroySession();
   }
 
-  createSession () {
+  createSession() {
     this.destroySession();
 
     this.sessionHelper = createSession({
       apiKey: this.props.apiKey,
       sessionId: this.props.sessionId,
       token: this.props.token,
-      onStreamsUpdated: streams => {
+      onStreamsUpdated: (streams) => {
         this.setState({ streams });
       },
       onConnect: this.props.onConnect,
-      onError: this.props.onError
+      onError: this.props.onError,
+      options: this.props.options,
     });
 
     if (
       this.props.eventHandlers &&
-      typeof this.props.eventHandlers === 'object'
+      typeof this.props.eventHandlers === "object"
     ) {
       this.sessionHelper.session.on(this.props.eventHandlers);
     }
@@ -58,11 +64,11 @@ class OTSession extends Component {
     this.props.onSession(session);
   }
 
-  destroySession () {
+  destroySession() {
     if (this.sessionHelper) {
       if (
         this.props.eventHandlers &&
-        typeof this.props.eventHandlers === 'object'
+        typeof this.props.eventHandlers === "object"
       ) {
         this.sessionHelper.session.off(this.props.eventHandlers);
       }
@@ -70,54 +76,53 @@ class OTSession extends Component {
     }
   }
 
-  render () {
-    const childrenWithProps = Children.map(
-      this.props.children,
-      child =>
-        child
-          ? cloneElement(child, {
-            session: this.sessionHelper.session,
-            streams: this.state.streams
-          })
-          : child
-    );
-
-    return [childrenWithProps];
+  render() {
+    return this.props.children;
   }
 }
 
 OTSession.propTypes = {
-  // children: PropTypes.oneOfType([
-  //   PropTypes.element,
-  //   PropTypes.arrayOf(PropTypes.element),
-  // ]),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
   apiKey: PropTypes.string.isRequired,
   sessionId: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onConnect: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
+  options: PropTypes.object,
 };
 
 OTSession.defaultProps = {
   eventHandlers: null,
   onConnect: null,
-  onError: null
+  onError: null,
+  options: {},
 };
 
-const mapStateToProps = state => ({
+OTSession.childContextTypes = {
+  streams: PropTypes.arrayOf(PropTypes.object),
+  session: PropTypes.shape({
+    subscribe: PropTypes.func,
+    unsubscribe: PropTypes.func,
+  }),
+};
+
+const mapStateToProps = (state) => ({
   streams: state.Streams,
-  user: state.session.user
+  user: state.session.user,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setStreams: count => {
+    setStreams: (count) => {
       dispatch(streams(count));
     },
-    onSession: data => {
+    onSession: (data) => {
       dispatch(opentokSession(data));
-    }
+    },
   };
 };
 
