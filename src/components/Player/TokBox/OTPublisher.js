@@ -11,7 +11,7 @@ import { Fab, Icon, Tooltip } from "@material-ui/core";
 import { allowCam, allowMic } from "./../../../actions/Player";
 
 class OTPublisher extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
     this.state = {
@@ -19,6 +19,7 @@ class OTPublisher extends Component {
       publisher: null,
       hideCamMic: false,
       lastStreamId: "",
+      session: props.session || context.session || null,
     };
   }
 
@@ -26,7 +27,7 @@ class OTPublisher extends Component {
     this.createPublisher();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const useDefault = (value, defaultValue) =>
       value === undefined ? defaultValue : value;
 
@@ -64,15 +65,15 @@ class OTPublisher extends Component {
     updatePublisherProperty("publishAudio", true);
     updatePublisherProperty("publishVideo", true);
 
-    if (this.props.session !== prevProps.session) {
-      this.destroyPublisher(prevProps.session);
+    if (this.state.session !== prevState.session) {
+      this.destroyPublisher(prevState.session);
       this.createPublisher();
     }
   }
 
   componentWillUnmount() {
-    if (this.props.session) {
-      this.props.session.off("sessionConnected", this.sessionConnectedHandler);
+    if (this.state.session) {
+      this.state.session.off("sessionConnected", this.sessionConnectedHandler);
     }
 
     this.destroyPublisher();
@@ -82,7 +83,7 @@ class OTPublisher extends Component {
     return this.state.publisher;
   }
 
-  destroyPublisher(session = this.props.session) {
+  destroyPublisher(session = this.state.session) {
     delete this.publisherId;
 
     if (this.state.publisher) {
@@ -107,7 +108,7 @@ class OTPublisher extends Component {
   publishToSession(publisher) {
     const { publisherId } = this;
 
-    this.props.session.publish(publisher, (err) => {
+    this.state.session.publish(publisher, (err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -122,7 +123,7 @@ class OTPublisher extends Component {
   }
 
   createPublisher() {
-    if (!this.props.session) {
+    if (!this.state.session) {
       this.setState({ publisher: null, lastStreamId: "" });
       return;
     }
@@ -177,10 +178,10 @@ class OTPublisher extends Component {
       publisher.on(handles);
     }
 
-    if (this.props.session.connection) {
+    if (this.state.session.connection) {
       this.publishToSession(publisher);
     } else {
-      this.props.session.once("sessionConnected", this.sessionConnectedHandler);
+      this.state.session.once("sessionConnected", this.sessionConnectedHandler);
     }
 
     this.setState({ publisher, lastStreamId: "" });
@@ -209,7 +210,9 @@ class OTPublisher extends Component {
       <div
         id="publisher"
         className={"video"}
-        ref={(node) => (this.node = node)}
+        ref={(node) => {
+          this.node = node;
+        }}
       >
         {this.state.pubError === null ? (
           <div className="box-buttons">
@@ -279,6 +282,18 @@ OTPublisher.propTypes = {
   onInit: PropTypes.func,
   onPublish: PropTypes.func,
   onError: PropTypes.func,
+};
+
+OTPublisher.contextTypes = {
+  session: PropTypes.shape({
+    connection: PropTypes.shape({
+      connectionId: PropTypes.string,
+    }),
+    once: PropTypes.func,
+    off: PropTypes.func,
+    publish: PropTypes.func,
+    unpublish: PropTypes.func,
+  }),
 };
 
 OTPublisher.defaultProps = {

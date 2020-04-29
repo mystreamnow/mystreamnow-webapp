@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { OTPublisher } from './../TokBox';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { OTPublisher } from "./../TokBox";
 
-import './assets/scss/publisher.scss';
-import Error from './_includes/errors';
+import "./assets/scss/publisher.scss";
+import Error from "./_includes/errors";
 
 class Publisher extends Component {
   constructor(props) {
@@ -12,12 +12,12 @@ class Publisher extends Component {
     this.state = {
       error: false,
       codeError: false,
-      fitMode: 'cover',
-      videoSource: 'camera',
+      fitMode: "cover",
+      videoSource: "camera",
     };
   }
 
-  onError = err => {
+  onError = (err) => {
     this.setState({ error: true, codeError: err.code });
   };
 
@@ -31,23 +31,22 @@ class Publisher extends Component {
       <React.Fragment>
         <OTPublisher
           initialChecked={this.state.videoSource}
-          session={this.props.session}
           properties={{
             fitMode: this.state.fitMode,
             name: name,
-            insertMode: 'replace',
+            insertMode: "replace",
             style: {
-              nameDisplayMode: 'auto',
-              buttonDisplayMode: 'off',
-              audioLevelDisplayMode: 'on',
-              archiveStatusDisplayMode: 'off',
+              nameDisplayMode: "auto",
+              buttonDisplayMode: "off",
+              audioLevelDisplayMode: "on",
+              archiveStatusDisplayMode: "off",
             },
             mirror: false,
             publishAudio: allowMic,
             publishVideo: allowCam,
             audioSource: currentMicrophone,
             videoSource:
-              this.state.videoSource === 'screen' ? 'screen' : currentCamera,
+              this.state.videoSource === "screen" ? "screen" : currentCamera,
             range: this.props.range,
           }}
           onError={this.onError}
@@ -58,7 +57,7 @@ class Publisher extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   camera: state.Camera,
   allowCam: state.AllowCam,
   microphone: state.Microphone,

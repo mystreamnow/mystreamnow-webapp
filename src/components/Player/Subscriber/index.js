@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { OTSubscriber } from './../TokBox';
+import React, { Component } from "react";
+import { OTSubscriber } from "./../TokBox";
 
-import './assets/scss/subscriber.scss';
+import "./assets/scss/subscriber.scss";
 
 export default class Subscriber extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Subscriber extends Component {
     };
   }
 
-  onError = err => {
+  onError = (err) => {
     this.setState({ error: `Failed to subscribe: ${err.message}` });
     console.error(err);
   };
@@ -22,16 +22,14 @@ export default class Subscriber extends Component {
   render() {
     return (
       <OTSubscriber
-        stream={this.props.stream}
-        session={this.props.session}
         properties={{
           subscribeToAudio: this.state.audio,
           subscribeToVideo: this.state.video,
           style: {
-            nameDisplayMode: 'auto',
-            buttonDisplayMode: 'off',
-            audioLevelDisplayMode: 'off',
-            archiveStatusDisplayMode: 'off',
+            nameDisplayMode: "auto",
+            buttonDisplayMode: "off",
+            audioLevelDisplayMode: "off",
+            archiveStatusDisplayMode: "off",
           },
         }}
         onError={this.onError}
