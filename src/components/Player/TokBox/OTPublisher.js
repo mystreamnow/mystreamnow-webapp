@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import once from "lodash/once";
+import { omitBy, isNil } from "lodash/fp";
 import uuid from "uuid";
 import { initPublisher } from "@opentok/client";
 import { connect } from "react-redux";
@@ -17,7 +18,7 @@ class OTPublisher extends Component {
       pubError: null,
       publisher: null,
       hideCamMic: false,
-      lastStreamId: ""
+      lastStreamId: "",
     };
   }
 
@@ -106,7 +107,7 @@ class OTPublisher extends Component {
   publishToSession(publisher) {
     const { publisherId } = this;
 
-    this.props.session.publish(publisher, err => {
+    this.props.session.publish(publisher, (err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -138,7 +139,7 @@ class OTPublisher extends Component {
     this.publisherId = uuid();
     const { publisherId } = this;
 
-    this.errorHandler = once(err => {
+    this.errorHandler = once((err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -153,7 +154,7 @@ class OTPublisher extends Component {
       }
     });
 
-    const publisher = initPublisher(container, properties, err => {
+    const publisher = initPublisher(container, properties, (err) => {
       if (publisherId !== this.publisherId) {
         // Either this publisher has been recreated or the
         // component unmounted so don't invoke any callbacks
@@ -172,7 +173,8 @@ class OTPublisher extends Component {
       this.props.eventHandlers &&
       typeof this.props.eventHandlers === "object"
     ) {
-      publisher.on(this.props.eventHandlers);
+      const handles = omitBy(isNil)(this.props.eventHandlers);
+      publisher.on(handles);
     }
 
     if (this.props.session.connection) {
@@ -188,15 +190,15 @@ class OTPublisher extends Component {
     this.publishToSession(this.state.publisher);
   };
 
-  streamCreatedHandler = event => {
+  streamCreatedHandler = (event) => {
     this.setState({ lastStreamId: event.stream.id });
   };
 
-  setAllowCam = data => {
+  setAllowCam = (data) => {
     this.props.onAllowCam(!data);
   };
 
-  setAllowMic = data => {
+  setAllowMic = (data) => {
     this.props.onAllowMic(!data);
   };
 
@@ -204,7 +206,11 @@ class OTPublisher extends Component {
     const { allowCam, allowMic } = this.props;
 
     return (
-      <div id="publisher" className={"video"} ref={node => (this.node = node)}>
+      <div
+        id="publisher"
+        className={"video"}
+        ref={(node) => (this.node = node)}
+      >
         {this.state.pubError === null ? (
           <div className="box-buttons">
             <Tooltip
@@ -261,18 +267,18 @@ class OTPublisher extends Component {
 OTPublisher.propTypes = {
   session: PropTypes.shape({
     connection: PropTypes.shape({
-      connectionId: PropTypes.string
+      connectionId: PropTypes.string,
     }),
     once: PropTypes.func,
     off: PropTypes.func,
     publish: PropTypes.func,
-    unpublish: PropTypes.func
+    unpublish: PropTypes.func,
   }),
   properties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   eventHandlers: PropTypes.objectOf(PropTypes.func),
   onInit: PropTypes.func,
   onPublish: PropTypes.func,
-  onError: PropTypes.func
+  onError: PropTypes.func,
 };
 
 OTPublisher.defaultProps = {
@@ -281,25 +287,25 @@ OTPublisher.defaultProps = {
   eventHandlers: null,
   onInit: null,
   onPublish: null,
-  onError: null
+  onError: null,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   camera: state.Camera,
   allowCam: state.AllowCam,
   microphone: state.Microphone,
   user: state.session.user,
-  allowMic: state.AllowMic
+  allowMic: state.AllowMic,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAllowCam: boolean => {
+    onAllowCam: (boolean) => {
       dispatch(allowCam(boolean));
     },
-    onAllowMic: boolean => {
+    onAllowMic: (boolean) => {
       dispatch(allowMic(boolean));
-    }
+    },
   };
 };
 
