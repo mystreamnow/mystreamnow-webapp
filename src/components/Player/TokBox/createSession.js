@@ -1,38 +1,32 @@
-import { initSession } from "@opentok/client";
+import { initSession } from '@opentok/client';
 
-export default function createSession({
-  apiKey,
-  sessionId,
-  token,
-  onStreamsUpdated,
-  onConnect,
-  onError,
-  options,
-} = {}) {
+export default function createSession (
+  { apiKey, sessionId, token, onStreamsUpdated, onConnect, onError } = {}
+) {
   if (!apiKey) {
-    throw new Error("Missing apiKey");
+    throw new Error('Missing apiKey');
   }
 
   if (!sessionId) {
-    throw new Error("Missing sessionId");
+    throw new Error('Missing sessionId');
   }
 
   if (!token) {
-    throw new Error("Missing token");
+    throw new Error('Missing token');
   }
 
   let streams = [];
 
-  let onStreamCreated = (event) => {
-    const index = streams.findIndex((stream) => stream.id === event.stream.id);
+  let onStreamCreated = event => {
+    const index = streams.findIndex(stream => stream.id === event.stream.id);
     if (index < 0) {
       streams.push(event.stream);
       onStreamsUpdated(streams);
     }
   };
 
-  let onStreamDestroyed = (event) => {
-    const index = streams.findIndex((stream) => stream.id === event.stream.id);
+  let onStreamDestroyed = event => {
+    const index = streams.findIndex(stream => stream.id === event.stream.id);
     if (index >= 0) {
       streams.splice(index, 1);
       onStreamsUpdated(streams);
@@ -41,20 +35,20 @@ export default function createSession({
 
   let eventHandlers = {
     streamCreated: onStreamCreated,
-    streamDestroyed: onStreamDestroyed,
+    streamDestroyed: onStreamDestroyed
   };
 
-  let session = initSession(apiKey, sessionId, options);
+  let session = initSession(apiKey, sessionId);
   session.on(eventHandlers);
-  session.connect(token, (err) => {
+  session.connect(token, err => {
     if (!session) {
       // Either this session has been disconnected or OTSession
       // has been unmounted so don't invoke any callbacks
       return;
     }
-    if (err && typeof onError === "function") {
+    if (err && typeof onError === 'function') {
       onError(err);
-    } else if (!err && typeof onConnect === "function") {
+    } else if (!err && typeof onConnect === 'function') {
       onConnect();
     }
   });
@@ -62,7 +56,7 @@ export default function createSession({
   return {
     session,
     streams,
-    disconnect() {
+    disconnect () {
       if (session) {
         session.off(eventHandlers);
         session.disconnect();
@@ -76,6 +70,6 @@ export default function createSession({
 
       this.session = null;
       this.streams = null;
-    },
+    }
   };
 }
